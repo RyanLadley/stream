@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ReelStream",
+    "\\ReelStream\\bin",
+    "\\ReelStream\\bin\\Debug",
+    "\\ReelStream\\bin\\Release",
+    "\\ReelStream\\obj",
+    "\\ReelStream\\Properties",
+    "\\ReelStream\\wwwroot"
+  ],
+  "SelectedNode": "\\ReelStream\\wwwroot\\index.html",
+  "PreviewInSolutionExplorer": false
+}
