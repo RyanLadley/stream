@@ -1,0 +1,48 @@
+﻿//$movie-img-height and $movie-img-width are defined in movie-queue.scss
+
+.movie-select {
+    float: left;
+    margin: 0 3px;
+    height: $movie-img-height;
+    width: $movie-img-width;
+    position: relative;
+    overflow: hidden;
+    @include transition-dimensions(.75s, .75s);
+    background: #3b3b3b;
+
+    img {
+        position: relative;
+        top: 0;
+        max-height: $movie-img-height;
+        max-width: $movie-img-width;
+        width: auto;
+        height: auto;
+    }
+
+    &:hover {
+        width: $movie-img-width *2;
+    }
+}
+
+
+.movie-img-description {
+    left: $movie-img-width;
+    top: 0;
+    color: white;
+    position: absolute;
+    width: $movie-img-width;
+    height: $movie-img-height;
+    @include transition-time(.75s);
+
+    h3 {
+        margin-top: 30px;
+        padding: 0 10px;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    p {
+        display: inline-block;
+        padding: 10px;
+    }
+}

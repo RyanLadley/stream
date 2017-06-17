@@ -1,0 +1,17 @@
+
+
+<ui-gmap-google-map center='map.center' zoom='map.zoom'>
+    <ui-gmap-markers models= "region.locations" coords="'self'" click="onClick" fit ="true">
+        <ui-gmap-windows show="show">
+            <div ng-non-bindable>
+                <img class="marker-window-thumbnail" src="{{thumbnail}}" />
+                <div  class="marker-window-content">
+                    <h2 class ="marker-window-header">{{name}}</h2>
+                    <p class ="marker-window-subheader">{{latitude}}, {{longitude}}</p>
+                    <a class ="marker-window-link" href="/state/{{region.stateId}}/location/{{id}}">Click For Details</a>
+                </div>
+            </div>
+        </ui-gmap-windows>
+    </ui-gmap-markers>
+</ui-gmap-google-map>
+

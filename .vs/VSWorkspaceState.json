@@ -2,13 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\ReelStream",
-    "\\ReelStream\\bin",
-    "\\ReelStream\\bin\\Debug",
-    "\\ReelStream\\bin\\Release",
-    "\\ReelStream\\obj",
-    "\\ReelStream\\Properties",
-    "\\ReelStream\\wwwroot"
+    "\\ReelStream\\Controllers",
+    "\\ReelStream\\Models",
+    "\\ReelStream\\Models\\Context",
+    "\\ReelStream\\Models\\DataTransfer",
+    "\\ReelStream\\Models\\Entities",
+    "\\ReelStream\\Models\\Repositories",
+    "\\ReelStream\\Models\\Repositories\\IRepositories",
+    "\\ReelStream\\Properties"
   ],
-  "SelectedNode": "\\ReelStream\\wwwroot\\index.html",
+  "SelectedNode": "\\ReelStream\\Controllers",
   "PreviewInSolutionExplorer": false
 }

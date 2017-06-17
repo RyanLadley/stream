@@ -1,0 +1,18 @@
+﻿<div class="queue-title">
+    <h2>{{queueTitle}}</h2>
+</div>
+
+<div class="queue-row" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
+    <div class="movie-queue">
+
+        <dif class="queue-arrow queue-left-arrow" ng-show="displayArrows">
+            <i class=" fa fa-5x fa-angle-left"></i> 
+        </dif>
+
+        <movie-select ng-repeat="movie in movies" movie ="movie"></movie-select>
+
+        <dif class="queue-arrow queue-right-arrow" ng-show="displayArrows">
+            <i class=" fa fa-5x fa-angle-right"></i> 
+        </dif>
+    </div>
+</div>

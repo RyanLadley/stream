@@ -1,9 +1,0 @@
-C:\Users\leu-lap\Desktop\Development\projects\NET\ReelStream\ReelStream\bin\Debug\netcoreapp1.1\ReelStream.deps.json
-C:\Users\leu-lap\Desktop\Development\projects\NET\ReelStream\ReelStream\bin\Debug\netcoreapp1.1\ReelStream.runtimeconfig.json
-C:\Users\leu-lap\Desktop\Development\projects\NET\ReelStream\ReelStream\bin\Debug\netcoreapp1.1\ReelStream.runtimeconfig.dev.json
-C:\Users\leu-lap\Desktop\Development\projects\NET\ReelStream\ReelStream\bin\Debug\netcoreapp1.1\ReelStream.dll
-C:\Users\leu-lap\Desktop\Development\projects\NET\ReelStream\ReelStream\obj\Debug\netcoreapp1.1\ReelStream.csprojResolveAssemblyReference.cache
-C:\Users\leu-lap\Desktop\Development\projects\NET\ReelStream\ReelStream\obj\Debug\netcoreapp1.1\ReelStream.AssemblyInfo.cs
-C:\Users\leu-lap\Desktop\Development\projects\NET\ReelStream\ReelStream\bin\Debug\netcoreapp1.1\ReelStream.pdb
-C:\Users\leu-lap\Desktop\Development\projects\NET\ReelStream\ReelStream\obj\Debug\netcoreapp1.1\ReelStream.dll
-C:\Users\leu-lap\Desktop\Development\projects\NET\ReelStream\ReelStream\obj\Debug\netcoreapp1.1\ReelStream.pdb

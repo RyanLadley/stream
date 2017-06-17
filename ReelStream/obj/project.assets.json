@@ -10286,15 +10286,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\leu-lap\\.nuget\\packages\\": {}
+    "C:\\Users\\leulad\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\leu-lap\\Desktop\\Development\\projects\\NET\\ReelStream\\ReelStream\\ReelStream.csproj",
-      "projectName": "ReelStream",
-      "projectPath": "C:\\Users\\leu-lap\\Desktop\\Development\\projects\\NET\\ReelStream\\ReelStream\\ReelStream.csproj",
-      "outputPath": "C:\\Users\\leu-lap\\Desktop\\Development\\projects\\NET\\ReelStream\\ReelStream\\obj\\",
+      "projectUniqueName": "E:\\Programing\\Projects\\NET\\stream\\ReelStream\\ReelStream.api.csproj",
+      "projectName": "ReelStream.api",
+      "projectPath": "E:\\Programing\\Projects\\NET\\stream\\ReelStream\\ReelStream.api.csproj",
+      "outputPath": "E:\\Programing\\Projects\\NET\\stream\\ReelStream\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"

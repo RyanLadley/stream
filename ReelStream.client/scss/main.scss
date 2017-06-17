@@ -1,0 +1,10 @@
+@import "mixins";
+@import "headers";
+@import "movie-queue";
+@import "movie-select";
+
+body {
+    font-family: 'Lato', sans-serif;
+    padding: 0;
+    margin: 0;
+}

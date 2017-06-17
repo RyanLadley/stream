@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <base href="/">
+
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/workspace/workspace.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+    <script src="/workspace/workspace.min.js"></script>
+
+</head>
+<body>
+    <video width="480" height="320" controls="controls" autoplay="autoplay">
+        <source src="http://localhost:53734/api/video/1" type="video/webm">
+    </video>
+    <div class="content">
+        <ng-view></ng-view>
+    </div>
+</body>
+
+</html>
