@@ -1,0 +1,46 @@
+﻿.section-title {
+    display: inline-block;
+    width: 100%;
+
+    h2 {
+        float: left;
+        padding-bottom: 3px;
+        border-bottom: 3px solid $reel-stream-blue;
+        font-size: 30px;
+        margin: 25px 0 0px 60px;
+    }
+}
+.sub-title {
+    display: inline-block;
+
+    h3 {
+        float: left;
+        padding-bottom: 3px;
+        border-bottom: 2px solid $reel-stream-blue;
+        font-size: 30px;
+        margin: 15px 0 5px 0px;
+    }
+}
+
+.title-sub-text {
+    p {
+        position: relative;
+        bottom:0;
+        float:left;
+    }
+}
+
+.small-text {
+    p {
+        padding: 0px;
+        margin: 0px;
+        font-size:12px;
+    }
+}
+input[type=text] {
+    background: white;
+    height: 25px;
+    padding: 8px 5px 5px 5px;
+    font-size: 20px;
+    border: 1px solid $reel-stream-grey;
+}

@@ -1,0 +1,28 @@
+﻿<div class="dialog-row dialog-center small-text">
+    <p><i>{{selectedMovie.flow.files[0].name}}</i></p>
+</div>
+
+<div class ="dialog-row dialog-center ">
+    <input class="add-movie-title-input" type = "text" placeholder="Movie Title" ng-model="searchTerm" ng-change ="delayedApiCall()"/>
+</div>
+
+<div class="dialog-row dialog-center ">
+    <button class="manual-input-button">Input Manually</button>
+</div>
+
+<div class="add-movie-selection">
+    <div class="add-movie-selection-section hoverable-selection" ng-click="selectSearchResult(movie)" ng-repeat="movie in searchResults">
+        <img class="add-movie-selection-image" ng-src="{{imageUrl}}{{movie.poster_path}}" />
+        <div class="sub-title">
+            <h3>{{movie.title}} ({{movie.release_date.getFullYear()}})</h3>
+        </div>
+        <div class="genre">
+            <label>Genre:</label>
+            <p>Comedy, Drama</p>
+        </div>
+        <div class="description">
+            <label>Description:</label>
+            <p>{{movie.overview}}</p>
+        </div>
+    </div>
+</div>

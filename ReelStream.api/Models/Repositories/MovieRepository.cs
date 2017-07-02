@@ -17,7 +17,8 @@ namespace ReelStream.api.Models.Repositories
         }
         public void Add(Movie movie)
         {
-            throw new NotImplementedException();
+            _context.Add(movie);
+            _context.SaveChanges();
         }
 
         public Movie Get(long id)

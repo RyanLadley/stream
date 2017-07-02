@@ -1,9 +1,0 @@
-﻿@mixin transition-time($time) {
-    -webkit-transition-duration: $time;
-    transition-duration: $time;
-}
-
-@mixin transition-dimensions( $widthTime, $heightTime) {
-    -webkit-transition: width $widthTime, height $heightTime;
-    transition: width $widthTime, height $heightTime;
-}

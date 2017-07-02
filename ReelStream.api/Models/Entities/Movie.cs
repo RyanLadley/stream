@@ -14,7 +14,7 @@ namespace ReelStream.api.Models.Entities
         public string ImageUrl { get; set; }
         
 
-        //TODO Remove Nullable - require emtpy db
+        //TODO: Remove Nullable - requires emtpy db
         public long? VideoFileId { get; set; }
         public VideoFile VideoFile { get; set; }
 

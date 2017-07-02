@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot/839243776-TheLostWorld-JurassicParkavi-4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\images\movies\jurassic-park-the-lost-world.jpg" />
     <Content Include="wwwroot\images\movies\jurrsic-park-the-lost-world.jpg" />
     <Content Include="wwwroot\images\movies\logan.jpg" />
@@ -28,6 +32,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="wwwroot\temp\" />
     <Folder Include="wwwroot\video\movies\" />
   </ItemGroup>
 

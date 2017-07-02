@@ -1,0 +1,28 @@
+﻿$add-movie-button-radius: 80px;
+
+
+.add-movie-button {
+    position:fixed;
+    bottom: 7%;
+    right: 5%;
+    z-index:99;
+    //
+    background: #2A8DFD;
+    @include circle-border($add-movie-button-radius/2);
+    width: $add-movie-button-radius;
+    height: $add-movie-button-radius;
+    box-shadow: 2px 2px 5px grey;
+    //
+    text-align: center;
+    color: #FFFFFF;
+    line-height: $add-movie-button-radius;
+    font-size: $add-movie-button-radius*(3/4);
+    text-shadow: 1px 1px 1px darkblue;
+
+    &:hover {
+        text-shadow: 1px 1px 1px black, 0 0 5px darkblue;
+        box-shadow: 2px 2px 5px black;
+        cursor:pointer;
+    }
+}
+

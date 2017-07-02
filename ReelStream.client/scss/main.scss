@@ -1,7 +1,14 @@
-@import "mixins";
+@import "shared/colors";
+@import "shared/mixins";
+@import "shared/components";
+@import "shared/dialog";
 @import "headers";
+@import "add-movie/main-button";
+@import "add-movie/file-select";
+@import "add-movie/selection";
 @import "movie-queue";
 @import "movie-select";
+@import "video-player";
 
 body {
     font-family: 'Lato', sans-serif;

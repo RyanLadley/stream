@@ -1,0 +1,26 @@
+﻿@mixin transition-time($time) {
+    -webkit-transition-duration: $time;
+    transition-duration: $time;
+}
+
+@mixin transition-dimensions( $widthTime, $heightTime) {
+    -webkit-transition: width $widthTime, height $heightTime;
+    transition: width $widthTime, height $heightTime;
+}
+
+@mixin circle-border($radius) {
+    -webkit-border-top-left-radius: $radius;
+    -webkit-border-top-right-radius: $radius;
+    -webkit-border-bottom-right-radius: $radius;
+    -webkit-border-bottom-left-radius: $radius;
+    //
+    -moz-border-radius-topleft: $radius;
+    -moz-border-radius-topright: $radius;
+    -moz-border-radius-bottomright: $radius;
+    -moz-border-radius-bottomleft: $radius;
+    //
+    border-top-right-radius: $radius;
+    border-bottom-right-radius: $radius;
+    border-bottom-left-radius: $radius;
+    border-bottom-left-radius: $radius;
+}

@@ -47,6 +47,7 @@ module.exports = function(grunt) {
         },
         dist: {
             src: ['./lib/jquery/jquery-2.2.4.js', './lib/angular/angular.min.js', './lib/angular/modules/*.min.js',
+                  './lib/ng-flow/*.min.js',
                   './workspace/min-safe/modules.min-safe.js','./workspace/min-safe/services.min-safe.js', './workspace/min-safe/routes.min-safe.js',
                   './workspace/min-safe/filters.min-safe.js', './workspace/min-safe/controllers.min-safe.js','./workspace/min-safe/directives.min-safe.js'],
             dest: './workspace/workspace.js'

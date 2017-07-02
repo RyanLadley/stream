@@ -7,6 +7,9 @@ using Microsoft.Extensions.Logging;
 using ReelStream.api.Models.Repositories.IRepositories;
 using ReelStream.api.Models.Context;
 using ReelStream.api.Models.Repositories;
+using ReelStream.api.Settings;
+using ReelStream.api.Models.Context.External;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace ReelStream
 {
@@ -29,10 +32,23 @@ namespace ReelStream
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            services.Configure<AppSettings>(Configuration);
+
             services.AddCors();
             services.AddMvc();
-            services.AddScoped<IMovieRepository,MovieRepository>();
+            services.Configure<FormOptions>(x =>
+            {
+                x.ValueLengthLimit = int.MaxValue;
+                x.MultipartBodyLengthLimit = int.MaxValue; // In case of multipart
+            });
+
+            services.AddScoped<IExternalMovieDatabase, ExternalMovieDatabase>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IVideoFileRepository, VideoFileRepository>();
+
+            services.AddTransient<ExternalMovieDatabase>();
+
             services.AddDbContext<MainContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 

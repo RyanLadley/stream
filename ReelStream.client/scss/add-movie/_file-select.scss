@@ -1,0 +1,20 @@
+﻿.select-file-button-wrapper {
+    margin: 25px 0;
+}
+
+.select-file-button {
+    background: #585858;
+    color: white;
+    border: none;
+    width: 150px;
+    padding: 10px 25px;
+    font-size: 20px;
+    border-radius: 10px;
+    outline: none;
+    box-shadow: 1px 1px 2px grey;
+
+    &:hover {
+        box-shadow: 1px 1px 2px black;
+        cursor: pointer;
+    }
+}

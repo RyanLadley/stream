@@ -6,12 +6,12 @@ E:\Programing\Projects\NET\stream\ReelStream\bin\Debug\netcoreapp1.1\ReelStream.
 E:\Programing\Projects\NET\stream\ReelStream\obj\Debug\netcoreapp1.1\ReelStream.api.AssemblyInfo.cs
 E:\Programing\Projects\NET\stream\ReelStream\obj\Debug\netcoreapp1.1\ReelStream.api.dll
 E:\Programing\Projects\NET\stream\ReelStream\obj\Debug\netcoreapp1.1\ReelStream.api.pdb
+E:\Programing\Projects\NET\stream\ReelStream.api\bin\Debug\netcoreapp1.1\ReelStream.api.dll
 E:\Programing\Projects\NET\stream\ReelStream.api\bin\Debug\netcoreapp1.1\ReelStream.api.deps.json
 E:\Programing\Projects\NET\stream\ReelStream.api\bin\Debug\netcoreapp1.1\ReelStream.api.runtimeconfig.json
 E:\Programing\Projects\NET\stream\ReelStream.api\bin\Debug\netcoreapp1.1\ReelStream.api.runtimeconfig.dev.json
-E:\Programing\Projects\NET\stream\ReelStream.api\bin\Debug\netcoreapp1.1\ReelStream.api.dll
-E:\Programing\Projects\NET\stream\ReelStream.api\bin\Debug\netcoreapp1.1\ReelStream.api.pdb
-E:\Programing\Projects\NET\stream\ReelStream.api\obj\Debug\netcoreapp1.1\ReelStream.api.csprojResolveAssemblyReference.cache
 E:\Programing\Projects\NET\stream\ReelStream.api\obj\Debug\netcoreapp1.1\ReelStream.api.AssemblyInfo.cs
 E:\Programing\Projects\NET\stream\ReelStream.api\obj\Debug\netcoreapp1.1\ReelStream.api.dll
 E:\Programing\Projects\NET\stream\ReelStream.api\obj\Debug\netcoreapp1.1\ReelStream.api.pdb
+E:\Programing\Projects\NET\stream\ReelStream.api\bin\Debug\netcoreapp1.1\ReelStream.api.pdb
+E:\Programing\Projects\NET\stream\ReelStream.api\obj\Debug\netcoreapp1.1\ReelStream.api.csprojResolveAssemblyReference.cache

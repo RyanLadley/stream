@@ -9,7 +9,7 @@ namespace ReelStream.api.Models.Entities
     /// This class is the represintaion of the file system Video. 
     /// It contains all meta pertaining to the file
     /// </summary>
-    public class VideoFile
+    public class VideoFile 
     {
         public long VideoFileId { get; set; }
         public string Folder { get; set; }

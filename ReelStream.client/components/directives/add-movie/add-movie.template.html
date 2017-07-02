@@ -1,0 +1,18 @@
+﻿<div class="add-movie-button" ng-click="displayDialog = true">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+</div>
+
+<div class="dialog-background" ng-show="displayDialog">
+    <div class="dialog-content">
+        <div class="dialog-close" ng-click="displayDialog = false">&#10006;</div>
+        <i ng-if ="currentDisplay.previous" ng-click ="back()" class="fa fa-arrow-circle-o-left  fa-3x dialog-back" aria-hidden="true"></i>
+
+        <div class="dialog-title">
+            <h2>Add A Movie</h2>
+        </div>
+
+        <add-movie-file-select ng-show="currentDisplay.current == 'file-select'"  display ="currentDisplay" selected-movie ="selectedMovie"></add-movie-file-select>
+        <add-movie-search ng-show="currentDisplay.current == 'search'" display ="currentDisplay" selected-movie ="selectedMovie"></add-movie-search>
+        <add-movie-confirmation ng-show="currentDisplay.current == 'confirm'" display="currentDisplay" selected-movie ="selectedMovie"></add-movie-confirmation>
+    </div>
+</div>

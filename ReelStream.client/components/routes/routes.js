@@ -7,10 +7,10 @@ app.config(['$routeProvider', '$locationProvider',
             templateUrl: '/site/home/home.index.html'
         }
     )
-    .when("/states/:stateId/regions/:regionId",
+    .when("/video-stream/:videoFileId",
         {
-            controller: 'regionsController',
-            templateUrl: '/site/regions/regions.index.html'
+            //controller: 'regionsController',
+            templateUrl: '/site/video-stream/video-player.index.html'
         }
     )
     .otherwise("/",
