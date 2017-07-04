@@ -3,13 +3,13 @@
 </div>
 
 <div class="add-movie-selection-section">
-    <img class="add-movie-selection-image" ng-src="{{imageUrl}}{{selectedMovie.poster_path}}" />
+    <img class="add-movie-selection-image" ng-src="{{imageUrl}}{{selectedMovie.flow.opts.query.poster_path}}" />
     <div class="sub-title">
-        <h3>{{selectedMovie.title}} ({{selectedMovie.release_date.getFullYear()}})</h3>
+        <h3>{{selectedMovie.flow.opts.query.title}} ({{selectedMovie.flow.opts.query.release_date.getFullYear()}})</h3>
     </div>
     <div class="genre">
         <label>File:</label>
-        <p>{{selectedMovie.flow.files[0].name}}</p>
+        <p>{{selectedMovie.flow.opts.query.flow.files[0].name}}</p>
     </div>
     <div class="genre">
         <label>Genre:</label>
@@ -17,7 +17,7 @@
     </div>
     <div class="description">
         <label>Description:</label>
-        <p>{{selectedMovie.overview}}</p>
+        <p>{{selectedMovie.flow.opts.query.overview}}</p>
     </div>
 </div>
 <div class="dialog-row dialog-center ">

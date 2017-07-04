@@ -28,7 +28,7 @@ namespace ReelStream.api.Models.Buisness
             {
                 FileName = this.FileName,
                 Folder = this.Folder.Replace("wwwroot\\", "").Replace("\\", "/"),
-                FileExtension = this.FileExtension
+                FileExtension = this.FileExtension.TrimStart('.')
             };
         }
     }

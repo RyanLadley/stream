@@ -23,7 +23,7 @@ namespace ReelStream.api.Controllers
         {
             var videoFile = _repository.Get(id);
 
-            var filename = $"wwwroot/video/{videoFile.Folder}/{videoFile.FileName}.{videoFile.FileExtension}";
+            var filename = $"wwwroot/{videoFile.Folder}/{videoFile.FileName}.{videoFile.FileExtension}";
             VideoStream stream = new VideoStream(new FileStream(filename, FileMode.Open, FileAccess.Read),
                                                  new MediaTypeHeaderValue($"video/{videoFile.FileExtension}"));
             

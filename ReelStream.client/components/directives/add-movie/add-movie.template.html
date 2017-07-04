@@ -1,8 +1,17 @@
-﻿<div class="add-movie-button" ng-click="displayDialog = true">
+﻿<div class="add-movie-button" ng-click="displayDialog = true" ng-show="!selectedMovie.flow.isUploading()">
     <i class="fa fa-plus" aria-hidden="true"></i>
 </div>
 
-<div class="dialog-background" ng-show="displayDialog">
+<div class="add-movie-button-upload" ng-show="selectedMovie.flow.isUploading()" title="{{selectedMovie.flow.opts.query.title}}">
+    <div class="add-movie-button">
+        <i class="fa fa-upload"  aria-hidden="true"></i>
+    </div>
+    <div class="add-movie-button upload-remaining" ng-style="uploadingStyle">
+        <i class="fa fa-upload" aria-hidden="true"></i>
+    </div>
+</div>
+
+<div class="dialog-background" ng-show="displayDialog  && currentDisplay != 'none'">
     <div class="dialog-content">
         <div class="dialog-close" ng-click="displayDialog = false">&#10006;</div>
         <i ng-if ="currentDisplay.previous" ng-click ="back()" class="fa fa-arrow-circle-o-left  fa-3x dialog-back" aria-hidden="true"></i>

@@ -21,5 +21,13 @@ namespace ReelStream.api.Models.Repositories
         {
             return _context.VideoFiles.FirstOrDefault(file => file.VideoFileId == id);
         }
+
+        public VideoFile Update(VideoFile videoFile)
+        {
+            _context.Update(videoFile);
+            _context.SaveChanges();
+
+            return videoFile;
+        }
     }
 }

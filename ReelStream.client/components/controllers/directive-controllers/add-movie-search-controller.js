@@ -31,8 +31,7 @@
 
    
     $scope.selectSearchResult = function (movie) {
-        movie.flow = $scope.selectedMovie.flow
-        $scope.selectedMovie = movie;
+        $scope.selectedMovie.flow.opts.query = movie;
         $scope.display.previous = $scope.display.current;
         $scope.display.current = 'confirm';
     }

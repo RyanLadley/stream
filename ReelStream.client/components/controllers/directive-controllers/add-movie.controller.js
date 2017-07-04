@@ -4,7 +4,12 @@
         previous: null
     };
 
-    $scope.selectedMovie = {};
+    $scope.selectedMovie = {
+        flow: {
+            isUploading: function () { },
+            progress: function () { return 0; }
+        }
+    };
 
     //This function holds the logic of controlling the "back button" 
     //TODO: Make this more elegant/scalable/readable
@@ -20,4 +25,15 @@
                 break;
         }
     }
+
+    var remaining = 0;
+    $scope.$watch(function ($scope) { return $scope.selectedMovie.flow.progress()}, function () {
+        remaining = ($scope.selectedMovie.flow.progress() * 100);
+        console.log(remaining);
+        $scope.uploadingStyle = {
+            "clip-path": "inset(0px -10px " + remaining + "% 0px)"
+        }
+        console.log($scope.uploadingStyle);
+        $scope.$apply;
+    });
 });

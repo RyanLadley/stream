@@ -19,7 +19,7 @@ namespace ReelStream.api.Models.DataTransfer
         public string poster_path { get; set; }
         public Stream image { get; set; }
 
-        public string imagePath { get { return Path.Combine(new String[]{"wwwroot", "images","movies","11", $"{title}.jpg"}); } }
+        public string imagePath { get { return Path.Combine(new String[]{"wwwroot", "images","movies","11", $"{title.Replace(":", "")}.jpg"}); } }
        
         public void ResolveMovieImage(IExternalMovieDatabase externalDB)
         {

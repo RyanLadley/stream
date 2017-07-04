@@ -9,5 +9,6 @@ namespace ReelStream.api.Models.Repositories.IRepositories
     public interface IVideoFileRepository
     {
         VideoFile Get(long id);
+        VideoFile Update(VideoFile videoFile);
     }
 }

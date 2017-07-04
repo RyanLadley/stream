@@ -8,7 +8,7 @@ namespace ReelStream.api.Models.Repositories.IRepositories
 {
     public interface IMovieRepository
     {
-        void Add(Movie movie);
+        Movie Add(Movie movie);
         Movie Get(long id);
         List<Movie> GetAll();
         void Remove(long id);

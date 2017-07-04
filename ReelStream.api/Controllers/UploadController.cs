@@ -10,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace ReelStream.api.Controllers
 {
     [Route("api/upload")]
@@ -19,12 +18,14 @@ namespace ReelStream.api.Controllers
         FileUpload _uploadService;
         private readonly IExternalMovieDatabase _externalDB;
         IMovieRepository _movieRpository;
+        IVideoFileRepository _videoFileRpository;
 
-        public UploadController(IMovieRepository movieRepo, IExternalMovieDatabase external)
+        public UploadController(IMovieRepository movieRepo, IVideoFileRepository videoFileRepo, IExternalMovieDatabase external)
         {
             _uploadService = new FileUpload();
             _externalDB = external;
             _movieRpository = movieRepo;
+            _videoFileRpository = videoFileRepo;
         }
 
 
@@ -56,8 +57,21 @@ namespace ReelStream.api.Controllers
                         newMovie.ResolveMovieImage(_externalDB);
 
                         var movieEntity = newMovie.MapToEntity(metadata.MapToVideoFileEntity());
-                        _movieRpository.Add(movieEntity);
-                        break;
+                        movieEntity = _movieRpository.Add(movieEntity);
+                        
+                        //If file is not mp4. it cannot be streamed properly to a browser so convert it
+                        //This process takes a while. Consider moveing this out of the flow
+                        if (metadata.FileExtension != ".mp4")
+                        {
+                            VideoFormatConverter converter = new VideoFormatConverter(metadata);
+                            metadata = converter.ConvertTo("mp4");
+                            var videoFileEntity = metadata.MapToVideoFileEntity();
+                            videoFileEntity.VideoFileId = movieEntity.VideoFile.VideoFileId;
+
+                            _videoFileRpository.Update(videoFileEntity);
+                        }
+
+                        return Created($"api/movies/{movieEntity.MovieId}", movieEntity);
                     }
                 }
 

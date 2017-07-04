@@ -26,3 +26,21 @@
     }
 }
 
+.add-movie-button-upload {
+    &:hover {
+        .add-movie-button {
+            text-shadow: 1px 1px 1px black, 0 0 5px darkblue;
+            box-shadow: 2px 2px 5px black;
+            cursor: pointer;
+        }
+
+        .upload-info-tooltip {
+            visibility: visible;
+        }
+    }
+}
+
+.upload-remaining {
+    background: #8B96A2;
+    color: lightgray;
+}

@@ -15,10 +15,12 @@ namespace ReelStream.api.Models.Repositories
         {
             _context = context;
         }
-        public void Add(Movie movie)
+        public Movie Add(Movie movie)
         {
             _context.Add(movie);
             _context.SaveChanges();
+
+            return movie;
         }
 
         public Movie Get(long id)
