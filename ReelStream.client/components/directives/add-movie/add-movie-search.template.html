@@ -12,13 +12,13 @@
 
 <div class="add-movie-selection">
     <div class="add-movie-selection-section hoverable-selection" ng-click="selectSearchResult(movie)" ng-repeat="movie in searchResults">
-        <img class="add-movie-selection-image" ng-src="{{imageUrl}}{{movie.poster_path}}" />
+        <img class="add-movie-selection-image" ng-src="{{imageUrl}}{{movie.posterPath}}" />
         <div class="sub-title">
-            <h3>{{movie.title}} ({{movie.release_date.getFullYear()}})</h3>
+            <h3>{{movie.title}} ({{movie.releaseDate.getFullYear()}})</h3>
         </div>
         <div class="genre">
-            <label>Genre:</label>
-            <p>Comedy, Drama</p>
+            <label>Genres:</label>
+            <p><span ng-repeat="genre in movie.genres">{{genre.name}}{{$last ? '' :', '}}</span></p>
         </div>
         <div class="description">
             <label>Description:</label>

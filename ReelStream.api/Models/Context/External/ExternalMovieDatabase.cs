@@ -8,6 +8,7 @@ using ReelStream.api.Models.DataTransfer;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using ReelStream.api.Models.DataTransfer.External;
+using ReelStream.api.Models.DataTransfer.Form;
 using System.IO;
 
 namespace ReelStream.api.Models.Context.External
@@ -45,7 +46,7 @@ namespace ReelStream.api.Models.Context.External
 
         public async Task SaveMovieImage(NewMovieForm movie)
         {
-            string apiRequest = $"{_settings.ImageUrl}{movie.poster_path}";
+            string apiRequest = $"{_settings.ImageUrl}{movie.posterPath}";
 
             using (HttpClient client = new HttpClient())
             using (HttpResponseMessage response = await client.GetAsync(apiRequest))

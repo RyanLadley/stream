@@ -25,8 +25,8 @@ namespace ReelStream.api.Logic
         public FileMetadata ConvertTo(string newExtension)
         {
             string originalPath = Path.Combine(_originalVideo.Folder, $"{_originalVideo.FileName}{_originalVideo.FileExtension}");
-            string newPath = Path.Combine(_originalVideo.Folder,$"{_originalVideo.FileName}.{newExtension}");
-
+            string newPath = FileMetadata.VerifyFileUniqueness(Path.Combine(_originalVideo.Folder,$"{_originalVideo.FileName}.{newExtension}"));
+            
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.CreateNoWindow = true;
             startInfo.UseShellExecute = false;
@@ -37,8 +37,7 @@ namespace ReelStream.api.Logic
             {
                 _executeCommand(startInfo);
 
-                _originalVideo.FileExtension = $".{newExtension}";
-                return _originalVideo;
+                return new FileMetadata(newPath);
             }
             catch
             {

@@ -10,5 +10,6 @@ namespace ReelStream.api.Models.Repositories.IRepositories
     {
         VideoFile Get(long id);
         VideoFile Update(VideoFile videoFile);
+        VideoFile Save(VideoFile videoFile);
     }
 }

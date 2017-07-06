@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace ReelStream.api.Models.DataTransfer.External
@@ -15,7 +12,7 @@ namespace ReelStream.api.Models.DataTransfer.External
         public int? ExternalId { get; set; }
 
         [JsonProperty(PropertyName = "title")]
-        public string title { get; set; }
+        public string Title { get; set; }
 
         [JsonProperty(PropertyName = "poster_path")]
         public string PosterPath { get; set; }
@@ -31,5 +28,6 @@ namespace ReelStream.api.Models.DataTransfer.External
 
         [JsonProperty(PropertyName = "release_date")]
         public DateTime? ReleaseDate { get; set; }
+
     }
 }

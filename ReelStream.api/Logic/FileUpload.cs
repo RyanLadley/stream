@@ -1,5 +1,5 @@
 ﻿using ReelStream.api.Models.Buisness;
-using ReelStream.api.Models.DataTransfer;
+using ReelStream.api.Models.DataTransfer.Form;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -64,7 +64,7 @@ namespace ReelStream.api.Logic
                 var tempFileName = _combineChunkFiles(flow);
 
                 var finalFilename = _createFinalPath(11, filename);
-                finalFilename = _verifyFileUniquness(finalFilename);
+                finalFilename = FileMetadata.VerifyFileUniqueness(finalFilename);
 
                 File.Move(tempFileName, finalFilename);
                 _deleteChunkFiles(flow);
@@ -168,19 +168,6 @@ namespace ReelStream.api.Logic
                     return false;
             return true;
         }
-
-        private string _verifyFileUniquness(string filename)
-        {
-            var i = 0;
-            while (File.Exists(filename))
-            {
-                var folder = Path.GetDirectoryName(filename);
-                var fileName = Path.GetFileNameWithoutExtension(filename) + $"({i})";
-                var fileExtension = Path.GetExtension(filename);
-                filename = Path.Combine(folder, fileName + fileExtension);
-            }
-
-            return filename;
-        }
+       
     }
 }

@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace ReelStream.api.Models.Repositories.IRepositories
 {
-    public interface IMovieRepository
+    public interface IGenreRepository
     {
-        Movie Add(Movie movie);
-        Movie Get(long id);
-        List<Movie> GetAll();
+        Genre Add(Genre movie);
+        Genre Get(long id);
+        List<Genre> GetAll();
+        List<Genre> GetByExternalIds(ICollection<int> genreIds);
         void Remove(long id);
-        Movie Update(Movie movie);
+        void Update(long id);
     }
 }

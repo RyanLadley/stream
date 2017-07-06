@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ReelStream.api.Models.DataTransfer
+namespace ReelStream.api.Models.DataTransfer.Form
 {
     public class FlowUploadForm
     {

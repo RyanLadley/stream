@@ -31,5 +31,36 @@ namespace ReelStream.api.Models.Buisness
                 FileExtension = this.FileExtension.TrimStart('.')
             };
         }
+
+        /// <summary>
+        /// This function maps the metadat to an already existing VideoFile Entity
+        /// This is used when the db context is already tracking the object, but we want to replace the meta data within
+        /// </summary>
+        /// <param name="videoFile"></param>
+        /// <returns></returns>
+        public VideoFile MapToExistingVideoFileEntity(VideoFile videoFile)
+        {
+
+            videoFile.FileName = this.FileName;
+            videoFile.Folder = this.Folder.Replace("wwwroot\\", "").Replace("\\", "/");
+            videoFile.FileExtension = this.FileExtension.TrimStart('.');
+
+            return videoFile;
+        }
+        public static string VerifyFileUniqueness(string filename)
+        {
+            var i = 0;
+            var newFilename = filename;
+            while (File.Exists(newFilename))
+            {
+                var folder = Path.GetDirectoryName(filename);
+                var fileName = Path.GetFileNameWithoutExtension(filename) + $"({i})";
+                var fileExtension = Path.GetExtension(filename);
+                newFilename = Path.Combine(folder, fileName + fileExtension);
+                i++;
+            }
+
+            return newFilename;
+        }
     }
 }

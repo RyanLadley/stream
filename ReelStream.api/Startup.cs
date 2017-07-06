@@ -46,6 +46,7 @@ namespace ReelStream
             services.AddScoped<IExternalMovieDatabase, ExternalMovieDatabase>();
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IVideoFileRepository, VideoFileRepository>();
+            services.AddScoped<IGenreRepository, GenreRepository>();
 
             services.AddTransient<ExternalMovieDatabase>();
 

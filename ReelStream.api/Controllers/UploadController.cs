@@ -2,7 +2,8 @@
 using ReelStream.api.Logic;
 using ReelStream.api.Models.Buisness;
 using ReelStream.api.Models.Context.External;
-using ReelStream.api.Models.DataTransfer;
+using ReelStream.api.Models.DataTransfer.Form;
+using ReelStream.api.Models.DataTransfer.Response;
 using ReelStream.api.Models.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace ReelStream.api.Controllers
         IMovieRepository _movieRpository;
         IVideoFileRepository _videoFileRpository;
 
-        public UploadController(IMovieRepository movieRepo, IVideoFileRepository videoFileRepo, IExternalMovieDatabase external)
+        public UploadController(IMovieRepository movieRepo, IVideoFileRepository videoFileRepo, IGenreRepository genreRepo, IExternalMovieDatabase external)
         {
             _uploadService = new FileUpload();
             _externalDB = external;
@@ -65,13 +66,13 @@ namespace ReelStream.api.Controllers
                         {
                             VideoFormatConverter converter = new VideoFormatConverter(metadata);
                             metadata = converter.ConvertTo("mp4");
-                            var videoFileEntity = metadata.MapToVideoFileEntity();
-                            videoFileEntity.VideoFileId = movieEntity.VideoFile.VideoFileId;
-
+                            var videoFileEntity = metadata.MapToExistingVideoFileEntity(movieEntity.VideoFile);
+                            //This saves the pending changes to the db. If this block is moved, change Save to Update. 
                             _videoFileRpository.Update(videoFileEntity);
+                            movieEntity.VideoFile = videoFileEntity;
                         }
 
-                        return Created($"api/movies/{movieEntity.MovieId}", movieEntity);
+                        return Created($"api/movies/{movieEntity.MovieId}", MovieSimpleResponse.MapFromEntity(movieEntity));
                     }
                 }
 

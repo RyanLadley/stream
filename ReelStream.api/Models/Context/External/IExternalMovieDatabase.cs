@@ -1,4 +1,4 @@
-﻿using ReelStream.api.Models.DataTransfer;
+﻿using ReelStream.api.Models.DataTransfer.Form;
 using ReelStream.api.Models.DataTransfer.External;
 using System.Collections.Generic;
 using System.Linq;

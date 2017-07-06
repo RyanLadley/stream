@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ReelStream.api.Models.Repositories.IRepositories;
-using ReelStream.api.Models.DataTransfer;
-using System.IO;
+using ReelStream.api.Models.DataTransfer.Response;
 using ReelStream.api.Models.Context.External;
 using ReelStream.api.Models.DataTransfer.External;
 using ReelStream.api.Logic;
@@ -16,13 +15,15 @@ namespace ReelStream.api.Controllers
     [Route("api/movies")]
     public class MovieController : Controller
     {
-        IMovieRepository _repository;
+        IMovieRepository _movieRepository;
         IExternalMovieDatabase _externalDB;
+        IGenreRepository _genreRepository;
         FileUpload _uploadService;
 
-        public MovieController(IMovieRepository repo, IExternalMovieDatabase external)
+        public MovieController(IMovieRepository movieRepo, IGenreRepository genreRepo, IExternalMovieDatabase external)
         {
-            _repository = repo;
+            _movieRepository = movieRepo;
+            _genreRepository = genreRepo;
             _externalDB = external;
             _uploadService = new FileUpload();
         }
@@ -30,7 +31,7 @@ namespace ReelStream.api.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var movies = _repository.GetAll();
+            var movies = _movieRepository.GetAll();
 
             List<MovieSimpleResponse> simpleResponse = new List<MovieSimpleResponse>();
 
@@ -51,7 +52,14 @@ namespace ReelStream.api.Controllers
         [HttpGet("search/{searchTerm}")]
         public async Task<IActionResult> SearchMovie(string searchTerm)
        {
-            List<ExternalMovie> response = await _externalDB.SearchMovie(searchTerm);
+            List<ExternalMovie> externalMovie = await _externalDB.SearchMovie(searchTerm);
+
+            List<MovieSearchResponse> response = new List<MovieSearchResponse>();
+            foreach(var movie in externalMovie)
+            {
+                response.Add(MovieSearchResponse.MapFromEntity(movie, _genreRepository));
+            }
+
             return Ok(response);
         }
     }

@@ -29,5 +29,12 @@ namespace ReelStream.api.Models.Repositories
 
             return videoFile;
         }
+
+        public VideoFile Save(VideoFile videoFile)
+        {
+            _context.SaveChanges();
+
+            return videoFile;
+        }
     }
 }

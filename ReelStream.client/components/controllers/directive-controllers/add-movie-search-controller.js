@@ -25,7 +25,7 @@
 
     var stringToDates = function(array){
         for(i = 0 ; i < array.length; i++){
-            array[i].release_date = new Date(array[i].release_date)
+            array[i].releaseDate = new Date(array[i].releaseDate)
         }
     };
 
