@@ -17,14 +17,14 @@ namespace ReelStream.api.Models.Repositories
             _context = context;
         }
 
-        public Genre Add(Genre movie)
+        public Genre Add(Genre genre)
         {
             throw new NotImplementedException();
         }
 
-        public Genre Get(long id)
+        public Genre GetFromId(int id)
         {
-            throw new NotImplementedException();
+            return _context.Genres.Where(genre => genre.GenreId == id).FirstOrDefault();
         }
 
         public List<Genre> GetAll()
@@ -40,6 +40,25 @@ namespace ReelStream.api.Models.Repositories
 
             return genres;
                          
+        }
+
+        /// <summary>
+        /// Get all genres the provided user has used in their movie collection
+        /// </summary>
+        /// <param name="genreIds"></param>
+        /// <returns></returns>
+        public List<Genre> GetImplementedByUser()
+        {
+            var genres = (from genre in _context.Genres
+                          where 
+                          (
+                            from movieGenre in _context.MovieGenres
+                            select movieGenre.GenreId
+                          ).Contains(genre.GenreId)
+                          select genre).ToList();
+
+            return genres;
+
         }
 
         public void Remove(long id)

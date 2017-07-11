@@ -1,0 +1,24 @@
+﻿<div class="browse-filter" ng-mouseenter="hoverIn()" ng-mouseleave="hoverOut()">
+    <div class="browse-button" ng-click="displaySelection = !displaySelection" >
+        <i class="fa fa-binoculars" aria-hidden="true"></i>
+        <h4>Browse</h4>
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
+    </div>
+
+    <div class="browse-container" ng-show="displaySelection">
+        <div class="browse-selection" ng-mouseleave="hoverOut()">
+            <div class="browse-type">
+                <h3>Movies</h3>
+                <h3>TV Shows</h3>
+                <h3 id ="selected" >Both</h3>
+            </div>
+            <div class="browse-genres">
+                <div class="browse-column" ng-repeat="genre in genres" ng-if="$index % columnHeight == 0">
+                    <a class="browse-column-position" ng-repeat="n in columnPositions"  ng-href="browse/genre/{{genres[$parent.$index+n].genreId}}/movies">
+                        <p>{{genres[$parent.$index+n].name}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

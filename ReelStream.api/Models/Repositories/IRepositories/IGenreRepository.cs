@@ -8,10 +8,11 @@ namespace ReelStream.api.Models.Repositories.IRepositories
 {
     public interface IGenreRepository
     {
-        Genre Add(Genre movie);
-        Genre Get(long id);
+        Genre Add(Genre genre);
+        Genre GetFromId(int id);
         List<Genre> GetAll();
         List<Genre> GetByExternalIds(ICollection<int> genreIds);
+        List<Genre> GetImplementedByUser();
         void Remove(long id);
         void Update(long id);
     }

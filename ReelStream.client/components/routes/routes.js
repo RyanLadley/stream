@@ -13,6 +13,12 @@ app.config(['$routeProvider', '$locationProvider',
             templateUrl: '/site/video-stream/video-player.index.html'
         }
     )
+    .when("/browse/genre/:genreId/:type",
+        {
+            controller: 'browseController',
+            templateUrl: '/site/browse/browse.index.html'
+        }
+    )
     .otherwise("/",
     {
         redirectTo: "/"

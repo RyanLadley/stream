@@ -3,11 +3,13 @@
 @import "shared/components";
 @import "shared/dialog";
 @import "headers";
+@import "browse-filter";
 @import "add-movie/main-button";
 @import "add-movie/file-select";
 @import "add-movie/selection";
-@import "movie-queue";
 @import "movie-select";
+@import "movie-queue";
+@import "movie-browse";
 @import "video-player";
 
 body {

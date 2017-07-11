@@ -62,5 +62,19 @@ namespace ReelStream.api.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("genre/{genreId}")]
+        public IActionResult GetAllByGenre(int genreId)
+        {
+            var movies = _movieRepository.GetAllForGenre(genreId);
+
+            List<MovieSimpleResponse> simpleResponse = new List<MovieSimpleResponse>();
+            foreach (var movie in movies)
+            {
+                simpleResponse.Add(MovieSimpleResponse.MapFromEntity(movie));
+            }
+
+            return Ok(simpleResponse);
+        }
     }
 }

@@ -1,0 +1,9 @@
+﻿<div class="section-title">
+    <h2 ng-show="genre">{{genre.name | capitalize}} {{type | capitalize}} </h2>
+</div>
+
+<div class="movie-browse">
+    <movie-select ng-repeat="movie in movies" movie="movie"></movie-select>
+</div>
+
+<add-movie></add-movie>

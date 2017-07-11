@@ -5,6 +5,7 @@ using ReelStream.api.Models.Repositories.IRepositories;
 using ReelStream.api.Models.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Data.SqlClient;
 
 namespace ReelStream.api.Models.Repositories
 {
@@ -12,8 +13,18 @@ namespace ReelStream.api.Models.Repositories
     {
         private MainContext _context;
 
+        #region SQL
+        //Returns a list of movies that contain the genre provided in the @genreId param
+        private string sqlMoviesForGenre =
+                $"SELECT Movies.*"+
+                $"  FROM Movies" +
+                $"  JOIN MovieGenres on MovieGenres.MovieId = Movies.MovieId" +
+                $"  WHERE MovieGenres.GenreId = @genreId";
+        #endregion
+
         public MovieRepository(MainContext context)
         {
+            
             _context = context;
         }
         public Movie Add(Movie movie)
@@ -35,6 +46,17 @@ namespace ReelStream.api.Models.Repositories
                 .Include(movie => movie.MovieGenres)
                     .ThenInclude(mg => mg.Genre)
                 .ToList();
+        }
+
+        public List<Movie> GetAllForGenre(int genreId)
+        {
+            var pGenreID = new SqlParameter("genreId", genreId);
+            var movies = _context.Movies.FromSql(sqlMoviesForGenre, pGenreID)
+                .Include(movie => movie.MovieGenres)
+                    .ThenInclude(mg => mg.Genre)
+                .ToList();
+
+            return movies;
         }
 
         public void Remove(long id)

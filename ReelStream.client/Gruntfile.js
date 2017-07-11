@@ -35,7 +35,7 @@ module.exports = function(grunt) {
                 './workspace/min-safe/routes.min-safe.js': './components/routes/*.js',
                 './workspace/min-safe/services.min-safe.js': './components/services/*.js',
                 './workspace/min-safe/filters.min-safe.js': './components/filters/*.js',
-                './workspace/min-safe/controllers.min-safe.js': './components/controllers/*/*.js',
+                './workspace/min-safe/controllers.min-safe.js': ['./components/controllers/*/*.js', './components/controllers/*/*/*.js'],
                 './workspace/min-safe/directives.min-safe.js': './components/directives/*/*.js'
             }
         }
