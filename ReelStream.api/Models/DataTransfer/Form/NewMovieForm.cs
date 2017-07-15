@@ -13,7 +13,7 @@ namespace ReelStream.api.Models.DataTransfer.Form
         public int? id { get; set; }
         public string title { get; set; }
         public string overview { get; set; }
-        public List<GenreForm> genres { get; set; } 
+        public IEnumerable<GenreForm> genres { get; set; } 
         public DateTime? releaseDate { get; set; }
         public string posterPath { get; set; }
         public Stream image { get; set; }

@@ -3,7 +3,8 @@
         restrict: 'E',
         controller: 'movieSelectController',
         scope: {
-            movie: '='
+            movie: '=',
+            selectStyle: '<?'
         },
         templateUrl: '/components/directives/movie-select/movie-select.template.html',
     };

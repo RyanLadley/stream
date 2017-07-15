@@ -3,7 +3,8 @@
 </div>
 
 <div class="movie-browse">
-    <movie-select ng-repeat="movie in movies" movie="movie"></movie-select>
+    <movie-row row-length = "moviesPerRow" movie-collection ="movieCollectionRows[0]"></movie-row>
+    <movie-row ng-repeat="collection in movieCollectionRows | limitTo: numberOfRows:1" movie-collection="collection"></movie-row>
 </div>
 
 <add-movie></add-movie>

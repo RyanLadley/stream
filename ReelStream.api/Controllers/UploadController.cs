@@ -41,7 +41,7 @@ namespace ReelStream.api.Controllers
         }
 
         [HttpPost("movie")]
-        public async Task<IActionResult> MovieUpload(FlowUploadForm flow, NewMovieForm newMovie)
+        public async Task<IActionResult> MovieUpload(FlowUploadForm flow, NewMovieForm newMovie, IEnumerable<GenreForm> genres)
         {
             try
             {
