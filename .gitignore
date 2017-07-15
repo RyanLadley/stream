@@ -1,4 +1,4 @@
 *.avi
-
+*/wwwroot/temp/*
 *.mp4
 *.jpg
