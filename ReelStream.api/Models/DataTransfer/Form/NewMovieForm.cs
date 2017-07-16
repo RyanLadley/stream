@@ -1,4 +1,5 @@
-﻿using ReelStream.api.Models.Context.External;
+﻿using Newtonsoft.Json;
+using ReelStream.api.Models.Context.External;
 using ReelStream.api.Models.DataTransfer.Response;
 using ReelStream.api.Models.Entities;
 using ReelStream.api.Models.Repositories.IRepositories;
@@ -13,10 +14,24 @@ namespace ReelStream.api.Models.DataTransfer.Form
         public int? id { get; set; }
         public string title { get; set; }
         public string overview { get; set; }
-        public IEnumerable<GenreForm> genres { get; set; } 
         public DateTime? releaseDate { get; set; }
         public string posterPath { get; set; }
         public Stream image { get; set; }
+
+
+        public string genreArrayString { get; set; }
+
+        //Genres are recieved as a string array from the front end. The property will deserialize this on it's first access. 
+        private ICollection<GenreForm> _genres;
+        public ICollection<GenreForm> genres {
+            get
+            {
+                if(_genres == null || _genres.Count == 0)
+                    _genres = JsonConvert.DeserializeObject<ICollection<GenreForm>>(genreArrayString);
+                return _genres;
+            }
+            set  {  _genres = value;  }
+        }
 
         public string imagePath { get { return Path.Combine(new String[]{"wwwroot", "images","movies","11", $"{title.Replace(":", "")}.jpg"}); } }
        
@@ -28,8 +43,9 @@ namespace ReelStream.api.Models.DataTransfer.Form
                 externalDB.SaveMovieImage(this);
             }
         }
+        
 
-        public Movie MapToEntity(VideoFile file)
+        public Movie MapToEntity(VideoFile file, bool includeGenreEntities = false)
         {
             var movieEntity = new Movie
             {
@@ -46,7 +62,9 @@ namespace ReelStream.api.Models.DataTransfer.Form
             {
                 movieGenres.Add(new MovieGenre()
                 {
+                    MovieId = movieEntity.MovieId,
                     Movie = movieEntity,
+                    GenreId = genre.genreId,
                     Genre = genre.MapToEntity()
                 });
             }

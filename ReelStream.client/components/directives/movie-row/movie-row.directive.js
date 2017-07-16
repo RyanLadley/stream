@@ -32,7 +32,7 @@
 
             scope.movieStyle = []
             scope.enlargeElement = function (index) {
-                var smallWidth = movieSelectSize * ((scope.rowLength - 0.5) / (scope.rowLength + 1))
+                var smallWidth = movieSelectSize - ((movieSelectSize) / (scope.rowLength-1))-2;
                 for (var i = 0; i < scope.movieCollection.length; i++) {
                     scope.movieStyle[i] = {
                         'width': smallWidth

@@ -29,8 +29,24 @@ namespace ReelStream.api.Models.Repositories
         }
         public Movie Add(Movie movie)
         {
+            //We only care about updating the Id's from the MovieGenre entity, so we ignore the actual objects.
+            List<Genre> ignoredFields = new List<Genre>(); //Keeps track of the element so we can track it again after the insert.
+            for(var i = 0; i < movie.MovieGenres.Count; i++)
+            {
+                ignoredFields.Insert(i, movie.MovieGenres.ElementAt(i).Genre);
+                movie.MovieGenres.ElementAt(i).Genre = null;
+            }
+
             _context.Add(movie);
             _context.SaveChanges();
+
+            //Reset the objects to being tracked incase another step wants to use it.
+            for (var i = 0; i < movie.MovieGenres.Count; i++)
+            {
+                movie.MovieGenres.ElementAt(i).Genre = ignoredFields.ElementAt(i);
+                _context.Entry(movie.MovieGenres.ElementAt(i).Genre).State = EntityState.Unchanged;
+                _context.Entry(movie.MovieGenres.ElementAt(i)).State = EntityState.Unchanged;
+            }
 
             return movie;
         }

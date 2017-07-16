@@ -18,7 +18,7 @@
         </div>
         <div class="genre">
             <label>Genres:</label>
-            <p><span ng-repeat="genre in movie.genres">{{genre.name}}{{$last ? '' :', '}}</span></p>
+            <p><span ng-repeat="genre in movie.genres track by $index">{{genre.name}}{{$last ? '' :', '}}</span></p>
         </div>
         <div class="description">
             <label>Description:</label>

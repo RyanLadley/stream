@@ -10,6 +10,7 @@ using ReelStream.api.Models.Repositories;
 using ReelStream.api.Settings;
 using ReelStream.api.Models.Context.External;
 using Microsoft.AspNetCore.Http.Features;
+using System.Linq;
 
 namespace ReelStream
 {

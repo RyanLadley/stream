@@ -1,5 +1,5 @@
 ﻿app.controller('browseController', function ($scope, $routeParams, serverRequest) {
-    
+
     var genreId = $routeParams.genreId;
     $scope.type = $routeParams.type
 
@@ -21,15 +21,16 @@
         updateRows();
     });
 
-    $scope.movieCollectionRows = []
+    $scope.movieCollectionRows = [[]]
     $scope.numberOfRows = 0
     //Creates the the movieCollections for the individial rows. 
     var updateRows = function () {
+        $scope.movieCollectionRows = [[]]
         if (typeof $scope.movies !== 'undefined') {
-            $scope.numberOfRow = Math.ceil($scope.moviesPerRow / $scope.movies.length)
+            $scope.numberOfRows = Math.ceil($scope.movies.length / $scope.moviesPerRow )
             var firstIndex = 0;
 
-            for (var i = 0; i < $scope.numberOfRow; i++) {
+            for (var i = 0; i < $scope.numberOfRows; i++) {
                 firstIndex = i * $scope.moviesPerRow
                 $scope.movieCollectionRows[i] = $scope.movies.slice(firstIndex, firstIndex + $scope.moviesPerRow);
             }

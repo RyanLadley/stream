@@ -41,8 +41,9 @@ namespace ReelStream.api.Controllers
         }
 
         [HttpPost("movie")]
-        public async Task<IActionResult> MovieUpload(FlowUploadForm flow, NewMovieForm newMovie, IEnumerable<GenreForm> genres)
+        public async Task<IActionResult> MovieUpload(FlowUploadForm flow, NewMovieForm newMovie)
         {
+           
             try
             {
                 foreach (var formFile in Request.Form.Files)
@@ -71,6 +72,7 @@ namespace ReelStream.api.Controllers
                             _videoFileRpository.Update(videoFileEntity);
                             movieEntity.VideoFile = videoFileEntity;
                         }
+
 
                         return Created($"api/movies/{movieEntity.MovieId}", MovieSimpleResponse.MapFromEntity(movieEntity));
                     }
