@@ -1,4 +1,5 @@
-﻿using ReelStream.api.Models.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using ReelStream.api.Models.Context;
 using ReelStream.api.Models.Entities;
 using ReelStream.api.Models.Repositories.IRepositories;
 using System;
@@ -17,9 +18,14 @@ namespace ReelStream.api.Models.Repositories
             _context = context;
         }
 
-        public VideoFile Get(long id)
+        public VideoFile GetFromMovieId(long movieId)
         {
-            return _context.VideoFiles.FirstOrDefault(file => file.VideoFileId == id);
+            var file = _context.Movies
+                            .Include(movie => movie.VideoFile)
+                       .FirstOrDefault(movie => movie.MovieId == movieId)
+                       .VideoFile;
+
+            return file;               
         }
 
         public VideoFile Update(VideoFile videoFile)

@@ -1,1 +1,0 @@
-START /wait ffmpeg.exe -i %1 %2 && del %1

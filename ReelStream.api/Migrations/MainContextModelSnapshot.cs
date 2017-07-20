@@ -39,6 +39,8 @@ namespace ReelStream.Migrations
 
                     b.Property<string>("ImageUrl");
 
+                    b.Property<TimeSpan?>("PlaybackTime");
+
                     b.Property<string>("Title");
 
                     b.Property<long?>("VideoFileId");
@@ -70,6 +72,8 @@ namespace ReelStream.Migrations
                 {
                     b.Property<long>("VideoFileId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<TimeSpan?>("Duration");
 
                     b.Property<string>("FileExtension");
 

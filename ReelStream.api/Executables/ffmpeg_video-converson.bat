@@ -1,0 +1,1 @@
+START /wait /d %0/.. ffmpeg.exe -i ../%1 ../%2 && del ../%1

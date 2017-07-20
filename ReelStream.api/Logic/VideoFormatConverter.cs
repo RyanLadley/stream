@@ -1,4 +1,5 @@
-﻿using ReelStream.api.Models.Buisness;
+﻿using ReelStream.api.Logic.Interfaces;
+using ReelStream.api.Models.Buisness;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,10 +12,12 @@ namespace ReelStream.api.Logic
     public class VideoFormatConverter
     {
         private FileMetadata _originalVideo;
+        private IMediaManager _mediaManager;
 
-        public VideoFormatConverter(FileMetadata originalFile)
+        public VideoFormatConverter(FileMetadata originalFile, IMediaManager mediaManager)
         {
             _originalVideo = originalFile;
+            _mediaManager = mediaManager;
         }
 
         /// <summary>
@@ -27,15 +30,10 @@ namespace ReelStream.api.Logic
             string originalPath = Path.Combine(_originalVideo.Folder, $"{_originalVideo.FileName}{_originalVideo.FileExtension}");
             string newPath = FileMetadata.VerifyFileUniqueness(Path.Combine(_originalVideo.Folder,$"{_originalVideo.FileName}.{newExtension}"));
             
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.CreateNoWindow = true;
-            startInfo.UseShellExecute = false;
-            startInfo.FileName = "ffmpeg.bat";
-            startInfo.Arguments = $"{originalPath} {newPath}"; 
 
             try
             {
-                _executeCommand(startInfo);
+                _mediaManager.VideoConversion(originalPath, newPath);
 
                 return new FileMetadata(newPath);
             }
@@ -46,13 +44,6 @@ namespace ReelStream.api.Logic
             }
            
         }
-
-        private void _executeCommand(ProcessStartInfo startInfo)
-        {
-            using (Process ffmeg = Process.Start(startInfo))
-            {
-                ffmeg.WaitForExit();
-            }
-        }
+        
     }
 }

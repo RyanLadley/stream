@@ -9,10 +9,10 @@ namespace ReelStream.api.Models.Repositories.IRepositories
     public interface IMovieRepository
     {
         Movie Add(Movie movie);
-        Movie Get(long id);
+        Movie Get(long movieId);
         List<Movie> GetAll();
         void Remove(long id);
-        Movie Update(Movie movie);
+        Movie UpdatePlayback(Movie movie);
         List<Movie> GetAllForGenre(int genreId);
     }
 }

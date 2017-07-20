@@ -7,9 +7,9 @@ app.config(['$routeProvider', '$locationProvider',
             templateUrl: '/site/home/home.index.html'
         }
     )
-    .when("/video-stream/:videoFileId",
+    .when("/video-stream/:movieId",
         {
-            controller: 'videoPlayerController',
+            //controller: 'videoPlayerController',
             templateUrl: '/site/video-stream/video-player.index.html'
         }
     )

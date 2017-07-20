@@ -18,10 +18,10 @@ namespace ReelStream.api.Controllers
             _repository = repository;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(long id)
+        [HttpGet("{movieId}")]
+        public IActionResult GetFromMovie(long movieId)
         {
-            var videoFile = _repository.Get(id);
+            var videoFile = _repository.GetFromMovieId(movieId);
 
             var filename = $"wwwroot/{videoFile.Folder}/{videoFile.FileName}.{videoFile.FileExtension}";
             VideoStream stream = new VideoStream(new FileStream(filename, FileMode.Open, FileAccess.Read),

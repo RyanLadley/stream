@@ -7,6 +7,8 @@ using ReelStream.api.Models.DataTransfer.Response;
 using ReelStream.api.Models.Context.External;
 using ReelStream.api.Models.DataTransfer.External;
 using ReelStream.api.Logic;
+using ReelStream.api.Models.DataTransfer.Form;
+using System.IO;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -33,20 +35,22 @@ namespace ReelStream.api.Controllers
         {
             var movies = _movieRepository.GetAll();
 
-            List<MovieSimpleResponse> simpleResponse = new List<MovieSimpleResponse>();
+            List<MovieResponse> simpleResponse = new List<MovieResponse>();
 
             foreach(var movie in movies)
             {
-                simpleResponse.Add(MovieSimpleResponse.MapFromEntity(movie));
+                simpleResponse.Add(MovieResponse.MapFromEntity(movie));
             }
 
             return Ok(simpleResponse);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(long id)
+        [HttpGet("{movieId}")]
+        public IActionResult Get(long movieId)
         {
-            throw new NotImplementedException();
+            var movies = _movieRepository.Get(movieId);
+
+            return Ok(MovieResponse.MapFromEntity(movies));
         }
         
         [HttpGet("search/{searchTerm}")]
@@ -63,15 +67,24 @@ namespace ReelStream.api.Controllers
             return Ok(response);
         }
 
+        [HttpPost("playback/{movieId}")]
+        public IActionResult UpdatePlayback(int movieId, [FromBody] UpdateMoviePlaybackForm moviePlayback)
+        {
+            string responseBody = new StreamReader(Request.Body).ReadToEnd();
+            _movieRepository.UpdatePlayback(moviePlayback.MapToEntity());
+
+            return NoContent();
+        }
+
         [HttpGet("genre/{genreId}")]
         public IActionResult GetAllByGenre(int genreId)
         {
             var movies = _movieRepository.GetAllForGenre(genreId);
 
-            List<MovieSimpleResponse> simpleResponse = new List<MovieSimpleResponse>();
+            List<MovieResponse> simpleResponse = new List<MovieResponse>();
             foreach (var movie in movies)
             {
-                simpleResponse.Add(MovieSimpleResponse.MapFromEntity(movie));
+                simpleResponse.Add(MovieResponse.MapFromEntity(movie));
             }
 
             return Ok(simpleResponse);

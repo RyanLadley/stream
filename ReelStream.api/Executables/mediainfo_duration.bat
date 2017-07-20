@@ -1,0 +1,1 @@
+START %0\..\MediaInfo.exe --Inform="Video;\%Duration\%" %1

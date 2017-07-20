@@ -12,6 +12,7 @@ namespace ReelStream.api.Models.Entities
         public string Description { get; set; }
         public int Year { get; set; }
         public string ImageUrl { get; set; }
+        public TimeSpan? PlaybackTime { get; set; }
 
         //TODO: Remove Nullable - requires emtpy db
         public long? VideoFileId { get; set; }

@@ -17,7 +17,6 @@ app.service('serverRequest', function ($http, $cookies, $location, appSettings) 
     };
 
     this.post = function (url, payload) {
-
         var form = JSON.stringify(payload);
 
         return $http.post(appSettings.serverUrl + url,form, {

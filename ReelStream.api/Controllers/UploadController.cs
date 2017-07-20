@@ -57,6 +57,7 @@ namespace ReelStream.api.Controllers
                     if(_uploadService.AttemptCompleteFileCreation(flow, formFile.FileName, out FileMetadata metadata))
                     {
                         newMovie.ResolveMovieImage(_externalDB);
+                        metadata.GetDuration(new MediaManager());
 
                         var movieEntity = newMovie.MapToEntity(metadata.MapToVideoFileEntity());
                         movieEntity = _movieRpository.Add(movieEntity);
@@ -65,8 +66,10 @@ namespace ReelStream.api.Controllers
                         //This process takes a while. Consider moveing this out of the flow
                         if (metadata.FileExtension != ".mp4")
                         {
-                            VideoFormatConverter converter = new VideoFormatConverter(metadata);
+                            VideoFormatConverter converter = new VideoFormatConverter(metadata, new MediaManager());
                             metadata = converter.ConvertTo("mp4");
+                            metadata.GetDuration(new MediaManager());
+
                             var videoFileEntity = metadata.MapToExistingVideoFileEntity(movieEntity.VideoFile);
                             //This saves the pending changes to the db. If this block is moved, change Save to Update. 
                             _videoFileRpository.Update(videoFileEntity);
@@ -74,12 +77,12 @@ namespace ReelStream.api.Controllers
                         }
 
 
-                        return Created($"api/movies/{movieEntity.MovieId}", MovieSimpleResponse.MapFromEntity(movieEntity));
+                        return Created($"api/movies/{movieEntity.MovieId}", MovieResponse.MapFromEntity(movieEntity));
                     }
                 }
 
             }
-            catch (Exception ex)
+            catch 
             {
                 return StatusCode(500, "There was an Error Uploading the File");
             }

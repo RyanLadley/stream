@@ -15,11 +15,17 @@ namespace ReelStream.api.Models.Repositories
 
         #region SQL
         //Returns a list of movies that contain the genre provided in the @genreId param
-        private string sqlMoviesForGenre =
-                $"SELECT Movies.*"+
-                $"  FROM Movies" +
-                $"  JOIN MovieGenres on MovieGenres.MovieId = Movies.MovieId" +
-                $"  WHERE MovieGenres.GenreId = @genreId";
+        private string sqlSelectMoviesForGenre =
+                $"SELECT Movies.* "+
+                $"  FROM Movies " +
+                $"  JOIN MovieGenres on MovieGenres.MovieId = Movies.MovieId " +
+                $"  WHERE MovieGenres.GenreId = @genreId; ";
+
+
+        private string sqlUpdateMoviePlaybackTime =
+            $"UPDATE Movies " +
+            $"  SET PlaybackTime = @playbackTime " +
+            $"WHERE MovieId = @movieId; ";
         #endregion
 
         public MovieRepository(MainContext context)
@@ -51,9 +57,12 @@ namespace ReelStream.api.Models.Repositories
             return movie;
         }
 
-        public Movie Get(long id)
+        public Movie Get(long movieId)
         {
-            throw new NotImplementedException();
+            return _context.Movies
+                    .Include(movie => movie.MovieGenres)
+                        .ThenInclude(mg => mg.Genre)
+                    .FirstOrDefault(movie => movie.MovieId == movieId);
         }
 
         public List<Movie> GetAll()
@@ -61,13 +70,14 @@ namespace ReelStream.api.Models.Repositories
             return _context.Movies
                 .Include(movie => movie.MovieGenres)
                     .ThenInclude(mg => mg.Genre)
+                .Include(movie => movie.VideoFile)
                 .ToList();
         }
 
         public List<Movie> GetAllForGenre(int genreId)
         {
-            var pGenreID = new SqlParameter("genreId", genreId);
-            var movies = _context.Movies.FromSql(sqlMoviesForGenre, pGenreID)
+            var pGenreId = new SqlParameter("@genreId", genreId);
+            var movies = _context.Movies.FromSql(sqlSelectMoviesForGenre, pGenreId)
                 .Include(movie => movie.MovieGenres)
                     .ThenInclude(mg => mg.Genre)
                 .ToList();
@@ -75,15 +85,23 @@ namespace ReelStream.api.Models.Repositories
             return movies;
         }
 
+        public Movie GetFromVideoId(long id)
+        {
+            var movie = _context.Movies.FirstOrDefault(queryMovie => queryMovie.VideoFileId == id);
+
+            return movie;
+        }
+
         public void Remove(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Movie Update(Movie movie)
+        public Movie UpdatePlayback(Movie movie)
         {
-            _context.Update(movie);
-            _context.SaveChanges();
+            var pMovieId = new SqlParameter("@movieId", movie.MovieId);
+            var pPlayybackTime = new SqlParameter("@playbackTime", movie.PlaybackTime);
+            _context.Database.ExecuteSqlCommand(sqlUpdateMoviePlaybackTime, pPlayybackTime, pMovieId);
 
             return movie;
         }
