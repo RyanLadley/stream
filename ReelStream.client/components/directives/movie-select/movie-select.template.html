@@ -1,4 +1,7 @@
 ﻿<a class="movie-select" ng-style ="selectStyle" href ="video-stream/{{movie.movieId}}" >
+    <div class="progress-track" ng-if="showPlaybackTrack()">
+        <div class="movie-select-progress" ng-style="progressStyle"></div>
+    </div>
     <img ng-src="{{imageServer}}/{{movie.imageUrl}}" />
     <div class="movie-img-description" >
         <h3>{{movie.title}}</h3>

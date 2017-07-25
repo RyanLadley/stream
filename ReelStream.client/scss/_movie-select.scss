@@ -47,3 +47,21 @@ $movie-img-width: 266px;
         padding: 10px;
     }
 }
+
+.progress-track {
+    z-index: 2;
+    display: inline-block;
+    width: 5px;
+    position: absolute;
+    left: 10px;
+    height: $movie-img-height;
+}
+
+.movie-select-progress {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: inline-block;
+    background-color: $reel-stream-blue;
+    //box-shadow: 1px 1px 1px $reel-stream-grey;
+}

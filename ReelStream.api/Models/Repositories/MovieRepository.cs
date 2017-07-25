@@ -19,7 +19,7 @@ namespace ReelStream.api.Models.Repositories
                 $"SELECT Movies.* "+
                 $"  FROM Movies " +
                 $"  JOIN MovieGenres on MovieGenres.MovieId = Movies.MovieId " +
-                $"  WHERE MovieGenres.GenreId = @genreId; ";
+                $"  WHERE MovieGenres.GenreId = @genreId";
 
 
         private string sqlUpdateMoviePlaybackTime =
@@ -80,6 +80,7 @@ namespace ReelStream.api.Models.Repositories
             var movies = _context.Movies.FromSql(sqlSelectMoviesForGenre, pGenreId)
                 .Include(movie => movie.MovieGenres)
                     .ThenInclude(mg => mg.Genre)
+                .Include(movie => movie.VideoFile)
                 .ToList();
 
             return movies;

@@ -26,7 +26,7 @@ namespace ReelStream.api.Models.DataTransfer.Response
             {
                 genres.Add(GenreResponse.MapFromEntity(movieGenre.Genre));
             }
-
+            
             MovieResponse movieDto = new MovieResponse()
             {
                 MovieId = movie.MovieId,
@@ -35,7 +35,7 @@ namespace ReelStream.api.Models.DataTransfer.Response
                 Year = movie.Year,
                 ImageUrl = movie.ImageUrl,
                 PlaybackTime = (movie.PlaybackTime.HasValue) ? movie.PlaybackTime.Value.TotalSeconds : 0,
-                Duration = (movie.VideoFile.Duration.HasValue) ? movie.VideoFile.Duration.Value.TotalSeconds : (double?)null,
+                Duration = (movie.VideoFile != null && movie.VideoFile.Duration.HasValue) ? movie.VideoFile.Duration.Value.TotalSeconds : (double?)null,
                 Genres = genres
             };
 

@@ -1,3 +1,36 @@
-﻿<video id="main-video-player" controls preload="auto" controlsList="nodownload" autoplay="autoplay">
-    <source ng-src="{{streamApi}}" type="video/mp4">
-</video>
+﻿<div id="full-screen-container">
+    <video id="main-video-player" preload="auto" controlsList="nodownload" autoplay="autoplay" ng-mousemove="displayControls()">
+        <source ng-src="{{streamApi}}" type="video/mp4">
+    </video>
+
+    <!--"-->
+    <div class="custom-video-controls-display" ng-show="showControls">
+        <div class="video-controls">
+            <div class="controls-button-container ">
+
+                <div class="playback-track" id="playback-track">
+                    <div class="playback-progress" ng-style="progressStyle" />
+                    <div class="playback-click-area" ng-click="jumpProgress($event)" ng-mousemove="getJumpLocation($event)" ng-mouseenter="displayJumpLocation = true" ng-mouseleave="displayJumpLocation = false" />
+                    <p class="jump-location" ng-style="jumpLocationPosition" ng-show="displayJumpLocation">{{jumpLocation | secondsToTime}}</p>
+                </div>
+
+                <div class="background">
+                    <div class="video-controls-button" id="play-pause-button" ng-click="togglePlayOrPause()">
+                        <i class="fa fa-lg" ng-class="playOrPauseIcon" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="video-controls-button" id="volume-button" ng-click="toggleMuted()">
+                        <i class="fa fa-lg" ng-class="volumeIcon" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="video-controls-button" id="full-screen-button" ng-click="toggleFullScreen()">
+                        <i class="fa" ng-class="fullScreenIcon" aria-hidden="true"></i>
+                    </div>
+
+                    <p class="time-stamp">{{videoPlayer.currentTime | secondsToTime}} | {{videoPlayer.duration | secondsToTime}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
