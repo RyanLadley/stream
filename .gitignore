@@ -1,5 +1,6 @@
 *.avi
 */wwwroot/temp/*
+*/wwwroot/*/movies/*
 *.mp4
 *.jpg
 */workspace/*.js
