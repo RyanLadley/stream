@@ -2,3 +2,7 @@
 */wwwroot/temp/*
 *.mp4
 *.jpg
+*/workspace/*.js
+*/workspace/*.css
+*/workspace/*.css.map
+*/workspace/min-safe/*.js
