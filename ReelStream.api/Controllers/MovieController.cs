@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ReelStream.api.Models.Repositories.IRepositories;
+using ReelStream.data.Models.Repositories.IRepositories;
 using ReelStream.api.Models.DataTransfer.Response;
 using ReelStream.api.Models.Context.External;
 using ReelStream.api.Models.DataTransfer.External;

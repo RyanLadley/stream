@@ -1,4 +1,4 @@
-﻿using ReelStream.api.Models.Entities;
+﻿using ReelStream.data.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

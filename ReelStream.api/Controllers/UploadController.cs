@@ -4,7 +4,7 @@ using ReelStream.api.Models.Buisness;
 using ReelStream.api.Models.Context.External;
 using ReelStream.api.Models.DataTransfer.Form;
 using ReelStream.api.Models.DataTransfer.Response;
-using ReelStream.api.Models.Repositories.IRepositories;
+using ReelStream.data.Models.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -60,6 +60,7 @@ namespace ReelStream.api.Controllers
                         metadata.GetDuration(new MediaManager());
 
                         var movieEntity = newMovie.MapToEntity(metadata.MapToVideoFileEntity());
+                        movieEntity.DateCreated = DateTime.Now;
                         movieEntity = _movieRpository.Add(movieEntity);
                         
                         //If file is not mp4. it cannot be streamed properly to a browser so convert it

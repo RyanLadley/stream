@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using ReelStream.api.Models.Context.External;
 using ReelStream.api.Models.DataTransfer.Response;
-using ReelStream.api.Models.Entities;
-using ReelStream.api.Models.Repositories.IRepositories;
+using ReelStream.data.Models.Entities;
+using ReelStream.data.Models.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.IO;

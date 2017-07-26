@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
-using ReelStream.api.Models.Entities;
+using ReelStream.data.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;

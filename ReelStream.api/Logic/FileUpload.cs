@@ -156,6 +156,7 @@ namespace ReelStream.api.Logic
         private string _createChunkFile(int chunkNumber, string flowId)
         {
             string filename = _getChunkFileName(chunkNumber, flowId);
+            Directory.CreateDirectory(Path.GetDirectoryName(filename));
             File.Create(filename).Dispose();
             return filename;
         }
@@ -163,7 +164,8 @@ namespace ReelStream.api.Logic
 
         private bool _allChunksArrived(int totalChunks, string flowId)
         {
-            for (int chunkNumber = 1; chunkNumber <= totalChunks; chunkNumber++)
+            //Starting from the top lessonsthe loop length as the files are sent starting from 1
+            for (int chunkNumber = totalChunks; chunkNumber >= 1; chunkNumber--)
                 if (!ChunkHasArrived(chunkNumber, flowId))
                     return false;
             return true;
