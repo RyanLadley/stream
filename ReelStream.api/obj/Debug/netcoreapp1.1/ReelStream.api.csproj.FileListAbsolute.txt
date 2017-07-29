@@ -17,3 +17,5 @@ E:\Programing\Projects\NET\stream\ReelStream.api\obj\Debug\netcoreapp1.1\ReelStr
 E:\Programing\Projects\NET\stream\ReelStream.api\obj\Debug\netcoreapp1.1\ReelStream.api.pdb
 E:\Programing\Projects\NET\stream\ReelStream.api\bin\Debug\netcoreapp1.1\ReelStream.data.dll
 E:\Programing\Projects\NET\stream\ReelStream.api\bin\Debug\netcoreapp1.1\ReelStream.data.pdb
+E:\Programing\Projects\NET\stream\ReelStream.api\bin\Debug\netcoreapp1.1\ReelStream.core.dll
+E:\Programing\Projects\NET\stream\ReelStream.api\bin\Debug\netcoreapp1.1\ReelStream.core.pdb

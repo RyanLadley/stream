@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ReelStream.api.Models.DataTransfer.Response;
+using ReelStream.core.Models.DataTransfer.Response;
 using ReelStream.data.Models.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -27,7 +27,7 @@ namespace ReelStream.api.Controllers
             List<GenreResponse> response = new List<GenreResponse>();
             foreach( var genre in genres)
             {
-                response.Add(GenreResponse.MapFromEntity(genre));
+                response.Add(GenreResponse.MapFromObject(genre));
             }
 
             return Ok(response);
@@ -38,7 +38,7 @@ namespace ReelStream.api.Controllers
         {
             var genre = _repository.GetFromId(genreId);
 
-            GenreResponse response = GenreResponse.MapFromEntity(genre);
+            GenreResponse response = GenreResponse.MapFromObject(genre);
     
             return Ok(response);
         }

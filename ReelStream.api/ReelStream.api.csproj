@@ -37,6 +37,7 @@
     <Folder Include="wwwroot\video\movies\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ReelStream.core\ReelStream.core.csproj" />
     <ProjectReference Include="..\ReelStream.data\ReelStream.data.csproj" />
   </ItemGroup>
 

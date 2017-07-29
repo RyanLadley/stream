@@ -1,0 +1,9 @@
+E:\Programing\Projects\NET\stream\ReelStream.core\bin\Debug\netcoreapp1.1\ReelStream.core.deps.json
+E:\Programing\Projects\NET\stream\ReelStream.core\bin\Debug\netcoreapp1.1\ReelStream.core.dll
+E:\Programing\Projects\NET\stream\ReelStream.core\bin\Debug\netcoreapp1.1\ReelStream.data.dll
+E:\Programing\Projects\NET\stream\ReelStream.core\bin\Debug\netcoreapp1.1\ReelStream.data.pdb
+E:\Programing\Projects\NET\stream\ReelStream.core\obj\Debug\netcoreapp1.1\ReelStream.core.csprojResolveAssemblyReference.cache
+E:\Programing\Projects\NET\stream\ReelStream.core\obj\Debug\netcoreapp1.1\ReelStream.core.AssemblyInfo.cs
+E:\Programing\Projects\NET\stream\ReelStream.core\bin\Debug\netcoreapp1.1\ReelStream.core.pdb
+E:\Programing\Projects\NET\stream\ReelStream.core\obj\Debug\netcoreapp1.1\ReelStream.core.dll
+E:\Programing\Projects\NET\stream\ReelStream.core\obj\Debug\netcoreapp1.1\ReelStream.core.pdb

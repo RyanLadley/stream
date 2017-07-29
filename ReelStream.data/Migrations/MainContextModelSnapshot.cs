@@ -16,7 +16,7 @@ namespace ReelStream.Migrations
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ReelStream.api.Models.Entities.Genre", b =>
+            modelBuilder.Entity("ReelStream.data.Models.Entities.Genre", b =>
                 {
                     b.Property<int>("GenreId")
                         .ValueGeneratedOnAdd();
@@ -30,12 +30,14 @@ namespace ReelStream.Migrations
                     b.ToTable("Genres");
                 });
 
-            modelBuilder.Entity("ReelStream.api.Models.Entities.Movie", b =>
+            modelBuilder.Entity("ReelStream.data.Models.Entities.Movie", b =>
                 {
                     b.Property<long>("MovieId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("DateCreated");
+                    b.Property<bool>("Adult");
+
+                    b.Property<DateTime>("DateCreated");
 
                     b.Property<string>("Description");
 
@@ -59,7 +61,7 @@ namespace ReelStream.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("ReelStream.api.Models.Entities.MovieGenre", b =>
+            modelBuilder.Entity("ReelStream.data.Models.Entities.MovieGenre", b =>
                 {
                     b.Property<long>("MovieId");
 
@@ -72,7 +74,7 @@ namespace ReelStream.Migrations
                     b.ToTable("MovieGenres");
                 });
 
-            modelBuilder.Entity("ReelStream.api.Models.Entities.VideoFile", b =>
+            modelBuilder.Entity("ReelStream.data.Models.Entities.VideoFile", b =>
                 {
                     b.Property<long>("VideoFileId")
                         .ValueGeneratedOnAdd();
@@ -90,21 +92,21 @@ namespace ReelStream.Migrations
                     b.ToTable("VideoFiles");
                 });
 
-            modelBuilder.Entity("ReelStream.api.Models.Entities.Movie", b =>
+            modelBuilder.Entity("ReelStream.data.Models.Entities.Movie", b =>
                 {
-                    b.HasOne("ReelStream.api.Models.Entities.VideoFile", "VideoFile")
+                    b.HasOne("ReelStream.data.Models.Entities.VideoFile", "VideoFile")
                         .WithOne("Movie")
-                        .HasForeignKey("ReelStream.api.Models.Entities.Movie", "VideoFileId");
+                        .HasForeignKey("ReelStream.data.Models.Entities.Movie", "VideoFileId");
                 });
 
-            modelBuilder.Entity("ReelStream.api.Models.Entities.MovieGenre", b =>
+            modelBuilder.Entity("ReelStream.data.Models.Entities.MovieGenre", b =>
                 {
-                    b.HasOne("ReelStream.api.Models.Entities.Genre", "Genre")
+                    b.HasOne("ReelStream.data.Models.Entities.Genre", "Genre")
                         .WithMany("MovieGenres")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ReelStream.api.Models.Entities.Movie", "Movie")
+                    b.HasOne("ReelStream.data.Models.Entities.Movie", "Movie")
                         .WithMany("MovieGenres")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade);

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ReelStream.api.Logic;
-using ReelStream.api.Models.Buisness;
-using ReelStream.api.Models.Context.External;
-using ReelStream.api.Models.DataTransfer.Form;
-using ReelStream.api.Models.DataTransfer.Response;
+using ReelStream.core.Logic;
+using ReelStream.core.Models.Buisness;
+using ReelStream.core.External.Context;
+using ReelStream.core.Models.DataTransfer.Form;
+using ReelStream.core.Models.DataTransfer.Response;
 using ReelStream.data.Models.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -78,7 +78,7 @@ namespace ReelStream.api.Controllers
                         }
 
 
-                        return Created($"api/movies/{movieEntity.MovieId}", MovieResponse.MapFromEntity(movieEntity));
+                        return Created($"api/movies/{movieEntity.MovieId}", MovieResponse.MapFromObject(movieEntity));
                     }
                 }
 

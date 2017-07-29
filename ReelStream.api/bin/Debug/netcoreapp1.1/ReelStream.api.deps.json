@@ -32,6 +32,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "1.1.1",
           "Microsoft.Extensions.Logging.Debug": "1.1.2",
           "Microsoft.NETCore.App": "1.1.1",
+          "ReelStream.core": "1.0.0",
           "ReelStream.data": "1.0.0"
         },
         "runtime": {
@@ -1602,6 +1603,20 @@
         },
         "compile": {
           "lib/netstandard1.0/System.Text.Encodings.Web.dll": {}
+        }
+      },
+      "reelstream.core/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore": "1.1.2",
+          "Microsoft.AspNetCore.Mvc": "1.1.3",
+          "Microsoft.NETCore.App": "1.1.1",
+          "ReelStream.data": "1.0.0"
+        },
+        "runtime": {
+          "ReelStream.core.dll": {}
+        },
+        "compile": {
+          "ReelStream.core.dll": {}
         }
       },
       "reelstream.data/1.0.0": {
@@ -3977,6 +3992,11 @@
       "sha512": "sha512-tcfPv+q/nK+5EsAxCLauIOd0kL+lZsXQ4lPKRnh8ex6O1Rm8WAN3LtF2GDFHyD0glSmUpIrgTnLhHCkMAKo3Ug==",
       "path": "system.text.encodings.web/4.3.1",
       "hashPath": "system.text.encodings.web.4.3.1.nupkg.sha512"
+    },
+    "reelstream.core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "reelstream.data/1.0.0": {
       "type": "project",

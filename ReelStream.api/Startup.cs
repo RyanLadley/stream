@@ -7,8 +7,8 @@ using Microsoft.Extensions.Logging;
 using ReelStream.data.Models.Repositories.IRepositories;
 using ReelStream.data.Models.Context;
 using ReelStream.data.Models.Repositories;
-using ReelStream.api.Settings;
-using ReelStream.api.Models.Context.External;
+using ReelStream.core.Settings;
+using ReelStream.core.External.Context;
 using Microsoft.AspNetCore.Http.Features;
 using System.Linq;
 

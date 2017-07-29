@@ -21,12 +21,18 @@ namespace ReelStream.data.Models.Repositories
                 $"  JOIN MovieGenres on MovieGenres.MovieId = Movies.MovieId " +
                 $"  WHERE MovieGenres.GenreId = @genreId";
 
+        private string sqlSelectMoviesInProgress =
+                $"SELECT Movies.* " +
+                $"  FROM Movies " +
+                $"  JOIN VideoFiles ON Movies.VideoFileId = VideoFiles.VideoFileId " +
+                $"  WHERE Movies.PlaybackTime IS NOT NULL" +
+                $"      AND Movies.PlaybackTime < VideoFiles.Duration ";
 
         private string sqlUpdateMoviePlaybackTime =
-            $"UPDATE Movies " +
-            $"  SET PlaybackTime = @playbackTime, " +
-            $"      LastViewDate = GETDATE()" +
-            $"WHERE MovieId = @movieId; ";
+                $"UPDATE Movies " +
+                $"  SET PlaybackTime = @playbackTime, " +
+                $"      LastViewDate = GETDATE()" +
+                $"WHERE MovieId = @movieId; ";
         #endregion
 
         public MovieRepository(MainContext context)
@@ -92,6 +98,33 @@ namespace ReelStream.data.Models.Repositories
             var movie = _context.Movies.FirstOrDefault(queryMovie => queryMovie.VideoFileId == id);
 
             return movie;
+        }
+
+        public List<Movie> GetMoviesInProgress()
+        {
+            var movies = _context.Movies.FromSql(sqlSelectMoviesInProgress)
+                .Include(movie => movie.MovieGenres)
+                    .ThenInclude(mg => mg.Genre)
+                .Include(movie => movie.VideoFile)
+                .OrderByDescending(movie => movie.LastViewDate)
+                .ToList();
+
+            return movies;
+
+        }
+
+        public List<Movie> GetNewlyAddedMovies()
+        {
+            DateTime now = DateTime.Now;
+            DateTime SevenDaysAgo = new DateTime(now.Year, now.Month, now.Day - 7);
+
+            return _context.Movies
+                .Include(movie => movie.MovieGenres)
+                    .ThenInclude(mg => mg.Genre)
+                .Include(movie => movie.VideoFile)
+                .Where(movie => movie.DateCreated > SevenDaysAgo)
+                .OrderByDescending(movie => movie.DateCreated)
+                .ToList();
         }
 
         public void Remove(long id)

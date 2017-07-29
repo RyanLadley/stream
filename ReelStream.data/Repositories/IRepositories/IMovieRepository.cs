@@ -14,5 +14,7 @@ namespace ReelStream.data.Models.Repositories.IRepositories
         void Remove(long id);
         Movie UpdatePlayback(Movie movie);
         List<Movie> GetAllForGenre(int genreId);
+        List<Movie> GetMoviesInProgress();
+        List<Movie> GetNewlyAddedMovies();
     }
 }

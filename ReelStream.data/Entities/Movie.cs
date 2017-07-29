@@ -14,7 +14,8 @@ namespace ReelStream.data.Models.Entities
         public string ImageUrl { get; set; }
         public TimeSpan? PlaybackTime { get; set; }
         public DateTime? LastViewDate { get; set; }
-        public DateTime? DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
+        public bool Adult { get; set; }
 
         //TODO: Remove Nullable - requires emtpy db
         public long? VideoFileId { get; set; }

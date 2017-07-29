@@ -1,3 +1,5 @@
-﻿<movie-queue queue-title ="'Movie Queue Example'" movies ="movies"></movie-queue>
+﻿<div ng-repeat="queue in queues">
+    <movie-queue queue-title="queue.name" movies="queue.movies"></movie-queue>
+</div>
 
 <add-movie></add-movie>

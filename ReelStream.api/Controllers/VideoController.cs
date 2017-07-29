@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ReelStream.data.Models.Repositories.IRepositories;
-using ReelStream.api.Logic;
+using ReelStream.core.Logic;
 using Microsoft.Net.Http.Headers;
 using System.IO;
 

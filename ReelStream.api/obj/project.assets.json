@@ -3882,6 +3882,16 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "ReelStream.core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v1.1",
+        "dependencies": {
+          "Microsoft.AspNetCore": "1.1.2",
+          "Microsoft.AspNetCore.Mvc": "1.1.3",
+          "Microsoft.NETCore.App": "1.1.1",
+          "ReelStream.data": "1.0.0"
+        }
+      },
       "ReelStream.data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.1",
@@ -10309,6 +10319,11 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "ReelStream.core/1.0.0": {
+      "type": "project",
+      "path": "../ReelStream.core/ReelStream.core.csproj",
+      "msbuildProject": "../ReelStream.core/ReelStream.core.csproj"
+    },
     "ReelStream.data/1.0.0": {
       "type": "project",
       "path": "../ReelStream.data/ReelStream.data.csproj",
@@ -10326,6 +10341,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 1.1.1",
       "Microsoft.Extensions.Logging.Debug >= 1.1.2",
       "Microsoft.NETCore.App >= 1.1.1",
+      "ReelStream.core >= 1.0.0",
       "ReelStream.data >= 1.0.0"
     ]
   },
@@ -10348,6 +10364,9 @@
           "projectReferences": {
             "E:\\Programing\\Projects\\NET\\stream\\ReelStream.data\\ReelStream.data.csproj": {
               "projectPath": "E:\\Programing\\Projects\\NET\\stream\\ReelStream.data\\ReelStream.data.csproj"
+            },
+            "E:\\Programing\\Projects\\NET\\stream\\ReelStream.core\\ReelStream.core.csproj": {
+              "projectPath": "E:\\Programing\\Projects\\NET\\stream\\ReelStream.core\\ReelStream.core.csproj"
             }
           }
         }

@@ -1,15 +1,8 @@
 app.controller('homeController', function ($scope, $location, serverRequest) {
 
-    serverRequest.get('/api/movies').then(function (response) {
-        $scope.movies = response.data;
+    serverRequest.get('/api/movies/queues').then(function (response) {
+        $scope.queues = response.data;
+        console.log($scope.queues)
     });
-
-    $scope.send = function () {
-        var search = {
-            fileName: $scope.movieSearch
-        };
-        serverRequest.post('/api/movies', search).then(function (response) {
-            console.log(response.data);
-        });
-    };
+    
 });

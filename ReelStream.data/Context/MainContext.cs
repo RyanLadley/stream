@@ -12,6 +12,10 @@ namespace ReelStream.data.Models.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Movie>()
+                .Property(movie => movie.Adult)
+                    .HasDefaultValue(0);
+
             modelBuilder.Entity<MovieGenre>()
                 .HasKey(mg => new { mg.MovieId, mg.GenreId});
 
