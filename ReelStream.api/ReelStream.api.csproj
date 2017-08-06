@@ -37,6 +37,10 @@
     <Folder Include="wwwroot\video\movies\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="authsettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReelStream.auth\ReelStream.auth.csproj" />
     <ProjectReference Include="..\ReelStream.core\ReelStream.core.csproj" />
     <ProjectReference Include="..\ReelStream.data\ReelStream.data.csproj" />
   </ItemGroup>

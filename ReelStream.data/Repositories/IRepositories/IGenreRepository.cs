@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ReelStream.data.Models.Repositories.IRepositories
+namespace ReelStream.data.Repositories.IRepositories
 {
     public interface IGenreRepository
     {
@@ -12,7 +12,7 @@ namespace ReelStream.data.Models.Repositories.IRepositories
         Genre GetFromId(int id);
         List<Genre> GetAll();
         List<Genre> GetByExternalIds(ICollection<int> genreIds);
-        List<Genre> GetImplementedByUser();
+        List<Genre> GetByUser(long userId);
         void Remove(long id);
         void Update(long id);
     }

@@ -19,8 +19,11 @@
             <a href="/">
                 <img class="tittle-img" src="images/app/reelstream.png" />
             </a>
-            <browse-filter></browse-filter>
+            <div ng-if="isLoggedIn">
+                <browse-filter></browse-filter>
+            </div>
         </div>
+
         <ng-view></ng-view>
     </div>
 </body>

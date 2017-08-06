@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ReelStream.data.Models.Repositories.IRepositories
+namespace ReelStream.data.Repositories.IRepositories
 {
     public interface IMovieRepository
     {
         Movie Add(Movie movie);
         Movie Get(long movieId);
-        List<Movie> GetAll();
+        List<Movie> GetAll(long userId);
         void Remove(long id);
         Movie UpdatePlayback(Movie movie);
-        List<Movie> GetAllForGenre(int genreId);
-        List<Movie> GetMoviesInProgress();
-        List<Movie> GetNewlyAddedMovies();
+        List<Movie> GetAllForGenre(long userId, int genreId);
+        List<Movie> GetMoviesInProgress(long userId);
+        List<Movie> GetNewlyAddedMovies(long userId);
     }
 }

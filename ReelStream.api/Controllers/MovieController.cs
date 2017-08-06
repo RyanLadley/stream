@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ReelStream.data.Models.Repositories.IRepositories;
+using ReelStream.data.Repositories.IRepositories;
 using ReelStream.core.Models.DataTransfer.Response;
 using ReelStream.core.External.Context;
 using ReelStream.core.External.Models;
 using ReelStream.core.Logic;
 using ReelStream.core.Models.DataTransfer.Form;
 using System.IO;
+using ReelStream.auth.Logic;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -31,9 +33,11 @@ namespace ReelStream.api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "GeneralUser")]
         public IActionResult GetAll()
         {
-            var movies = _movieRepository.GetAll();
+            var userId = TokenManager.ExtractUserId(User.Claims);
+            var movies = _movieRepository.GetAll(userId);
 
             List<MovieResponse> simpleResponse = new List<MovieResponse>();
 
@@ -46,10 +50,12 @@ namespace ReelStream.api.Controllers
         }
 
         [HttpGet("queues")]
+        [Authorize(Policy = "GeneralUser")]
         public IActionResult GetQueues()
         {
+            var userId = TokenManager.ExtractUserId(User.Claims);
             QueueCurator curator = new QueueCurator(_movieRepository);
-            var queues = curator.BuildMovieQueues();
+            var queues = curator.BuildMovieQueues(userId);
 
             List<MovieQueueResponse> responseQueues = new List<MovieQueueResponse>();
 
@@ -71,6 +77,7 @@ namespace ReelStream.api.Controllers
         }
         
         [HttpGet("search/{searchTerm}")]
+        [Authorize(Policy = "GeneralUser")]
         public async Task<IActionResult> SearchMovie(string searchTerm)
        {
             List<ExternalMovie> externalMovie = await _externalDB.SearchMovie(searchTerm);
@@ -85,6 +92,7 @@ namespace ReelStream.api.Controllers
         }
 
         [HttpPost("playback/{movieId}")]
+        [Authorize(Policy = "GeneralUser")]
         public IActionResult UpdatePlayback(int movieId, [FromBody] UpdateMoviePlaybackForm moviePlayback)
         {
             string responseBody = new StreamReader(Request.Body).ReadToEnd();
@@ -94,9 +102,12 @@ namespace ReelStream.api.Controllers
         }
 
         [HttpGet("genre/{genreId}")]
+        [Authorize(Policy = "GeneralUser")]
         public IActionResult GetAllByGenre(int genreId)
         {
-            var movies = _movieRepository.GetAllForGenre(genreId);
+            var userId = TokenManager.ExtractUserId(User.Claims);
+
+            var movies = _movieRepository.GetAllForGenre(userId, genreId);
 
             List<MovieResponse> simpleResponse = new List<MovieResponse>();
             foreach (var movie in movies)

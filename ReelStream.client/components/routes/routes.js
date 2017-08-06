@@ -19,6 +19,18 @@ app.config(['$routeProvider', '$locationProvider',
             templateUrl: '/site/browse/browse.index.html'
         }
     )
+    .when("/login",
+        {
+            controller: 'loginController',
+            templateUrl: '/site/registrar/login.index.html'
+        }
+    )
+    .when("/register",
+        {
+            controller: 'registerController',
+            templateUrl: '/site/registrar/register.index.html'
+        }
+    )
     .otherwise("/",
     {
         redirectTo: "/"

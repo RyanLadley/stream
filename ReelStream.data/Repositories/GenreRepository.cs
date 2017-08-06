@@ -1,10 +1,12 @@
-﻿using ReelStream.data.Models.Repositories.IRepositories;
+﻿using ReelStream.data.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ReelStream.data.Models.Entities;
 using ReelStream.data.Models.Context;
+using System.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace ReelStream.data.Models.Repositories
 {
@@ -12,11 +14,21 @@ namespace ReelStream.data.Models.Repositories
     {
         private MainContext _context;
 
+        #region SQL
+        string sqlGenresByUser =
+                "SELECT DISTINCT Genres.* " +
+                "    FROM Genres " +
+                "    JOIN MovieGenres ON MovieGenres.GenreId = Genres.GenreId " +
+                "    JOIN Movies ON Movies.MovieId = MovieGenres.MovieId " +
+                "    WHERE Movies.UserId = @userId ";
+        #endregion
+
         public GenreRepository(MainContext context)
         {
             _context = context;
         }
 
+        
         public Genre Add(Genre genre)
         {
             throw new NotImplementedException();
@@ -35,7 +47,7 @@ namespace ReelStream.data.Models.Repositories
         public List<Genre> GetByExternalIds(ICollection<int> genreIds)
         {
             var genres = (from genre in _context.Genres
-                          where genreIds.Contains(genre.ExternalId)
+                          where genreIds.Contains(genre.ExternalId.Value)
                           select genre).ToList();
 
             return genres;
@@ -47,15 +59,10 @@ namespace ReelStream.data.Models.Repositories
         /// </summary>
         /// <param name="genreIds"></param>
         /// <returns></returns>
-        public List<Genre> GetImplementedByUser()
+        public List<Genre> GetByUser(long userId)
         {
-            var genres = (from genre in _context.Genres
-                          where 
-                          (
-                            from movieGenre in _context.MovieGenres
-                            select movieGenre.GenreId
-                          ).Contains(genre.GenreId)
-                          select genre).ToList();
+            var pUserId = new SqlParameter("@userId", userId);
+            var genres = _context.Genres.FromSql(sqlGenresByUser, pUserId).ToList();
 
             return genres;
 

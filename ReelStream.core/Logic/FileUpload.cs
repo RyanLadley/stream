@@ -22,9 +22,9 @@ namespace ReelStream.core.Logic
         string root = "wwwroot";
 
 
-        public async Task AddChunkFile(byte[] chunk, FlowUploadForm flow)
+        public async Task AddChunkFile(long userId, byte[] chunk, FlowUploadForm flow)
         {
-            string filename = _createChunkFile(flow.flowChunkNumber, flow.flowIdentifier);
+            string filename = _createChunkFile(userId, flow.flowChunkNumber, flow.flowIdentifier);
             for (int i = 1; i <= NumberOfRetries; ++i)
             {
                 try
@@ -39,9 +39,7 @@ namespace ReelStream.core.Logic
                 }
                 catch (IOException e)
                 {
-                    // You may check error code to filter some exceptions, not every error
-                    // can be recovered.
-                    if (i == NumberOfRetries) // Last one, (re)throw exception and exit
+                    if (i == NumberOfRetries)
                         throw;
 
                     Thread.Sleep(DelayOnRetry);
@@ -50,24 +48,24 @@ namespace ReelStream.core.Logic
         }
 
 
-        public bool ChunkHasArrived(int chunkNumber, string flowId)
+        public bool ChunkHasArrived(long userId, int chunkNumber, string flowId)
         {
-            string fileName = _getChunkFileName(chunkNumber, flowId);
+            string fileName = _getChunkFileName(userId, chunkNumber, flowId);
             return File.Exists(fileName);
         }
 
 
-        public bool AttemptCompleteFileCreation(FlowUploadForm flow, string filename, out FileMetadata fileinfo )
+        public bool AttemptCompleteFileCreation(long userId, FlowUploadForm flow, string filename, out FileMetadata fileinfo )
         {
-            if(_allChunksArrived(flow.flowTotalChunks, flow.flowIdentifier))
+            if(_allChunksArrived(userId, flow.flowTotalChunks, flow.flowIdentifier))
             {
-                var tempFileName = _combineChunkFiles(flow);
+                var tempFileName = _combineChunkFiles(userId, flow);
 
-                var finalFilename = _createFinalPath(11, filename);
+                var finalFilename = _createFinalPath(userId, filename);
                 finalFilename = FileMetadata.VerifyFileUniqueness(finalFilename);
 
                 File.Move(tempFileName, finalFilename);
-                _deleteChunkFiles(flow);
+                _deleteChunkFiles(userId, flow);
 
                 fileinfo = new FileMetadata(finalFilename);
 
@@ -90,9 +88,9 @@ namespace ReelStream.core.Logic
         }
 
 
-        private string _combineChunkFiles(FlowUploadForm flow)
+        private string _combineChunkFiles(long userId, FlowUploadForm flow)
         {
-            var tempFileName = Path.Combine(root, "temp", flow.flowIdentifier);
+            var tempFileName = Path.Combine(root, "temp", userId.ToString(), flow.flowIdentifier);
             for (int i = 1; i <= NumberOfRetries; ++i)
             {
                 try
@@ -101,7 +99,7 @@ namespace ReelStream.core.Logic
                     {
                         for (int chunkNumber = 1; chunkNumber <= flow.flowTotalChunks; chunkNumber++)
                         {
-                            var chunkFileName = _getChunkFileName(chunkNumber, flow.flowIdentifier);
+                            var chunkFileName = _getChunkFileName(userId, chunkNumber, flow.flowIdentifier);
                             using (var sourceStream = File.OpenRead(chunkFileName))
                             {
                                 sourceStream.CopyTo(destStream);
@@ -125,22 +123,22 @@ namespace ReelStream.core.Logic
         }
 
 
-        private void _deleteChunkFiles(FlowUploadForm flow){
+        private void _deleteChunkFiles(long userId, FlowUploadForm flow){
             for (int chunkNumber = 1; chunkNumber <= flow.flowTotalChunks; chunkNumber++)
             {
-                var chunkFileName = _getChunkFileName(chunkNumber, flow.flowIdentifier);
+                var chunkFileName = _getChunkFileName(userId, chunkNumber, flow.flowIdentifier);
                 File.Delete(chunkFileName);
             }
         }
 
 
-        private string _getChunkFileName(int chunkNumber, string chunkId)
+        private string _getChunkFileName(long userId, int chunkNumber, string chunkId)
         {
-            return Path.Combine(root, "temp", string.Format("{0}-{1}", chunkId, chunkNumber.ToString()));
+            return Path.Combine(root, "temp", userId.ToString(), string.Format("{0}-{1}", chunkId, chunkNumber.ToString()));
         }
 
 
-        private string _createFinalPath(int userId, string filename)
+        private string _createFinalPath(long userId, string filename)
         {
             string filepath = Path.Combine(root, userId.ToString());
             Directory.CreateDirectory(filepath);
@@ -153,20 +151,20 @@ namespace ReelStream.core.Logic
         }
 
 
-        private string _createChunkFile(int chunkNumber, string flowId)
+        private string _createChunkFile(long userId, int chunkNumber, string flowId)
         {
-            string filename = _getChunkFileName(chunkNumber, flowId);
+            string filename = _getChunkFileName(userId, chunkNumber, flowId);
             Directory.CreateDirectory(Path.GetDirectoryName(filename));
             File.Create(filename).Dispose();
             return filename;
         }
 
 
-        private bool _allChunksArrived(int totalChunks, string flowId)
+        private bool _allChunksArrived(long userId, int totalChunks, string flowId)
         {
-            //Starting from the top lessonsthe loop length as the files are sent starting from 1
+            //Starting from the top lessons the loop length as the files are sent starting from 1
             for (int chunkNumber = totalChunks; chunkNumber >= 1; chunkNumber--)
-                if (!ChunkHasArrived(chunkNumber, flowId))
+                if (!ChunkHasArrived(userId, chunkNumber, flowId))
                     return false;
             return true;
         }

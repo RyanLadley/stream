@@ -1,0 +1,11 @@
+E:\Programing\Projects\NET\stream\ReelStream.auth\bin\Debug\netcoreapp1.1\ReelStream.auth.deps.json
+E:\Programing\Projects\NET\stream\ReelStream.auth\bin\Debug\netcoreapp1.1\ReelStream.auth.dll
+E:\Programing\Projects\NET\stream\ReelStream.auth\obj\Debug\netcoreapp1.1\ReelStream.auth.csprojResolveAssemblyReference.cache
+E:\Programing\Projects\NET\stream\ReelStream.auth\obj\Debug\netcoreapp1.1\ReelStream.auth.AssemblyInfo.cs
+E:\Programing\Projects\NET\stream\ReelStream.auth\bin\Debug\netcoreapp1.1\ReelStream.auth.pdb
+E:\Programing\Projects\NET\stream\ReelStream.auth\bin\Debug\netcoreapp1.1\ReelStream.data.dll
+E:\Programing\Projects\NET\stream\ReelStream.auth\bin\Debug\netcoreapp1.1\ReelStream.data.pdb
+E:\Programing\Projects\NET\stream\ReelStream.auth\obj\Debug\netcoreapp1.1\ReelStream.auth.dll
+E:\Programing\Projects\NET\stream\ReelStream.auth\obj\Debug\netcoreapp1.1\ReelStream.auth.pdb
+E:\Programing\Projects\NET\stream\ReelStream.auth\bin\Debug\netcoreapp1.1\ReelStream.core.dll
+E:\Programing\Projects\NET\stream\ReelStream.auth\bin\Debug\netcoreapp1.1\ReelStream.core.pdb

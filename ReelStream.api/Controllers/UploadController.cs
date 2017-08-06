@@ -4,12 +4,14 @@ using ReelStream.core.Models.Buisness;
 using ReelStream.core.External.Context;
 using ReelStream.core.Models.DataTransfer.Form;
 using ReelStream.core.Models.DataTransfer.Response;
-using ReelStream.data.Models.Repositories.IRepositories;
+using ReelStream.data.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using ReelStream.auth.Logic;
 
 namespace ReelStream.api.Controllers
 {
@@ -31,9 +33,11 @@ namespace ReelStream.api.Controllers
 
 
         [HttpGet("movie")]
+        [Authorize(Policy = "GeneralUser")]
         public IActionResult TestMovieUpload(int flowChunkNumber, string flowIdentifier)
         {
-            if (_uploadService.ChunkHasArrived(flowChunkNumber, flowIdentifier))
+            var userId = TokenManager.ExtractUserId(User.Claims);
+            if (_uploadService.ChunkHasArrived(userId, flowChunkNumber, flowIdentifier))
                 return Ok();
             else
                 return NoContent();
@@ -41,9 +45,10 @@ namespace ReelStream.api.Controllers
         }
 
         [HttpPost("movie")]
+        [Authorize(Policy = "GeneralUser")]
         public async Task<IActionResult> MovieUpload(FlowUploadForm flow, NewMovieForm newMovie)
         {
-           
+            var userId = TokenManager.ExtractUserId(User.Claims);
             try
             {
                 foreach (var formFile in Request.Form.Files)
@@ -52,14 +57,14 @@ namespace ReelStream.api.Controllers
                     using (var binaryReader = new BinaryReader(readStream))
                     {
                         var fileContent = binaryReader.ReadBytes((int)formFile.Length);
-                        await _uploadService.AddChunkFile(fileContent, flow);
+                        await _uploadService.AddChunkFile(userId, fileContent, flow);
                     }
-                    if(_uploadService.AttemptCompleteFileCreation(flow, formFile.FileName, out FileMetadata metadata))
+                    if(_uploadService.AttemptCompleteFileCreation(userId, flow, formFile.FileName, out FileMetadata metadata))
                     {
                         newMovie.ResolveMovieImage(_externalDB);
                         metadata.GetDuration(new MediaManager());
 
-                        var movieEntity = newMovie.MapToEntity(metadata.MapToVideoFileEntity());
+                        var movieEntity = newMovie.MapToEntity(userId, metadata.MapToVideoFileEntity());
                         movieEntity.DateCreated = DateTime.Now;
                         movieEntity = _movieRpository.Add(movieEntity);
                         

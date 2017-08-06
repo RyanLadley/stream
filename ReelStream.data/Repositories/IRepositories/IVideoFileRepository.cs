@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ReelStream.data.Models.Repositories.IRepositories
+namespace ReelStream.data.Repositories.IRepositories
 {
     public interface IVideoFileRepository
     {

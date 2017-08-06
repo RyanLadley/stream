@@ -1,36 +1,38 @@
-app.service('serverRequest', function ($http, $cookies, $location, appSettings) {
+app.service('serverRequest', function ($http, $cookies, $location, appSettings, tokenManager) {
 
-    //Http get request wrapper to send data to api.
+    ///Serves as a wrapper for the $HTTP
+    
     this.get = function (url, payload) {
-        var form = JSON.stringify(payload);
-
-        return $http.get(appSettings.serverUrl + url, form, {
-            withCredentials: false,
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-        }).then(
-            function (response) {
-                return response;
-            });
+        return httpRequest('GET', url, payload);
     };
 
     this.post = function (url, payload) {
-        var form = JSON.stringify(payload);
-
-        return $http.post(appSettings.serverUrl + url,form, {
-            withCredentials: false,
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            //transformRequest: angular.identity
-        }).then(
-            function (success) {
-                return success;
-            });
+        return httpRequest('POST', url, payload);
     };
 
-    var createForm = function(payload){}
+    var httpRequest = function (httpMethod, url, payload) {
+        var form = JSON.stringify(payload);
+
+        return $http({
+            method: httpMethod,
+            url: appSettings.serverUrl + url,
+            data: form,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + tokenManager.getToken()
+            }
+        })
+        .then(
+        function (response) {
+            checkAuthorized(response)
+            return response;
+        });
+    }
+
+    var checkAuthorized = function (response) {
+        if (response.status == 415) {
+            $location.url("/login");
+        }
+    }
 });

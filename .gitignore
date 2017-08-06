@@ -7,3 +7,6 @@
 */workspace/*.css
 */workspace/*.css.map
 */workspace/min-safe/*.js
+*/bin/*
+packages/*
+*.dll

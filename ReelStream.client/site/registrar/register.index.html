@@ -1,0 +1,36 @@
+﻿<div class="registrar-page">
+    <div class="center">
+        <div class="registrar-contatiner">
+            <div class="section-title registrar-title">
+                <h2>New Member</h2>
+            </div>
+            <p class="error">{{errorMessage}}</p>
+            <div class="label-text regristrar-input-container">
+                <label>Username</label>
+                <input type="text" ng-model="user.username" />
+            </div>
+            <div class="label-text regristrar-input-container">
+                <label>Password</label>
+                <input type="password" ng-model="user.passphrase" />
+            </div>
+            <div class="label-text regristrar-input-container">
+                <label>Confirm Password</label>
+                <input type="password" ng-model="confirmPassword" />
+            </div>
+            <div class="label-text regristrar-input-container">
+                <label>First Name</label>
+                <input type="text" ng-model="user.firstName" />
+            </div>
+            <div class="label-text regristrar-input-container">
+                <label>Last Name</label>
+                <input type="text" ng-model="user.lastName" />
+            </div>
+            <div class="label-text regristrar-input-container">
+                <label>Email</label>
+                <input type="email" ng-model="user.email" />
+            </div>
+
+            <button class="standard-button registrar-button" ng-click="sendRegistration()">Register</button>
+        </div>
+    </div>
+</div>

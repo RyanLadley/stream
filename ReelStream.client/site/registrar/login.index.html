@@ -1,0 +1,22 @@
+﻿<div class="registrar-page">
+    <div class="center">
+        <div class="registrar-contatiner">
+            <div class="section-title registrar-title">
+                <h2>Sign In</h2>
+            </div>
+            <p class="error">{{errorMessage}}</p>
+            <div class="label-text regristrar-input-container">
+                <label>Username</label>
+                <input type="text" ng-model="credentials.username" />
+            </div>
+            <div class="label-text regristrar-input-container">
+                <label>Password</label>
+                <input type="password" ng-model="credentials.passphrase" />
+            </div>
+            <button class="standard-button registrar-button" ng-click="login()">Sign In</button>
+            <div>
+                <p>Not A Member? <a href="register">Register Now</a></p>
+            </div>
+        </div>
+    </div>
+</div>

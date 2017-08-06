@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using ReelStream.data.Models.Context;
 
-namespace ReelStream.Migrations
+namespace ReelStream.data.Migrations
 {
     [DbContext(typeof(MainContext))]
     partial class MainContextModelSnapshot : ModelSnapshot
@@ -21,7 +21,7 @@ namespace ReelStream.Migrations
                     b.Property<int>("GenreId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ExternalId");
+                    b.Property<int?>("ExternalId");
 
                     b.Property<string>("Name");
 
@@ -35,7 +35,9 @@ namespace ReelStream.Migrations
                     b.Property<long>("MovieId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Adult");
+                    b.Property<bool>("Adult")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(false);
 
                     b.Property<DateTime>("DateCreated");
 
@@ -47,13 +49,18 @@ namespace ReelStream.Migrations
 
                     b.Property<TimeSpan?>("PlaybackTime");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
-                    b.Property<long?>("VideoFileId");
+                    b.Property<long>("UserId");
+
+                    b.Property<long>("VideoFileId");
 
                     b.Property<int>("Year");
 
                     b.HasKey("MovieId");
+
+                    b.HasIndex("UserId");
 
                     b.HasIndex("VideoFileId")
                         .IsUnique();
@@ -74,6 +81,37 @@ namespace ReelStream.Migrations
                     b.ToTable("MovieGenres");
                 });
 
+            modelBuilder.Entity("ReelStream.data.Models.Entities.User", b =>
+                {
+                    b.Property<long>("UserId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<string>("Password")
+                        .IsRequired();
+
+                    b.Property<byte[]>("Salt")
+                        .IsRequired();
+
+                    b.Property<string>("Username")
+                        .IsRequired();
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("ReelStream.data.Models.Entities.VideoFile", b =>
                 {
                     b.Property<long>("VideoFileId")
@@ -81,11 +119,14 @@ namespace ReelStream.Migrations
 
                     b.Property<TimeSpan?>("Duration");
 
-                    b.Property<string>("FileExtension");
+                    b.Property<string>("FileExtension")
+                        .IsRequired();
 
-                    b.Property<string>("FileName");
+                    b.Property<string>("FileName")
+                        .IsRequired();
 
-                    b.Property<string>("Folder");
+                    b.Property<string>("Folder")
+                        .IsRequired();
 
                     b.HasKey("VideoFileId");
 
@@ -94,9 +135,15 @@ namespace ReelStream.Migrations
 
             modelBuilder.Entity("ReelStream.data.Models.Entities.Movie", b =>
                 {
+                    b.HasOne("ReelStream.data.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("ReelStream.data.Models.Entities.VideoFile", "VideoFile")
                         .WithOne("Movie")
-                        .HasForeignKey("ReelStream.data.Models.Entities.Movie", "VideoFileId");
+                        .HasForeignKey("ReelStream.data.Models.Entities.Movie", "VideoFileId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ReelStream.data.Models.Entities.MovieGenre", b =>

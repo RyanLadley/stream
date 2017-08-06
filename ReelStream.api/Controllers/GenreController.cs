@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using ReelStream.auth.Logic;
 using ReelStream.core.Models.DataTransfer.Response;
-using ReelStream.data.Models.Repositories.IRepositories;
+using ReelStream.data.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +22,11 @@ namespace ReelStream.api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "GeneralUser")]
         public IActionResult GetImplementedByUser()
         {
-            var genres = _repository.GetImplementedByUser();
+            var userId = TokenManager.ExtractUserId(User.Claims);
+            var genres = _repository.GetByUser(userId);
 
             List<GenreResponse> response = new List<GenreResponse>();
             foreach( var genre in genres)

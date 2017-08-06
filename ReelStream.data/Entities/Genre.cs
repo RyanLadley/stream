@@ -9,7 +9,7 @@ namespace ReelStream.data.Models.Entities
     {
         public int GenreId { get; set; }
         public string Name { get; set; }
-        public int ExternalId { get; set; } //Currently Maps to TMDB genre id's
+        public int? ExternalId { get; set; } //Currently Maps to TMDB genre id's
 
         public List<MovieGenre> MovieGenres { get; set; }
     }

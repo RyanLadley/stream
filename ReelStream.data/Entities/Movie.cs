@@ -17,8 +17,12 @@ namespace ReelStream.data.Models.Entities
         public DateTime DateCreated { get; set; }
         public bool Adult { get; set; }
 
+
+        public long UserId { get; set; }
+        public User User { get; set; }
+
         //TODO: Remove Nullable - requires emtpy db
-        public long? VideoFileId { get; set; }
+        public long VideoFileId { get; set; }
         public VideoFile VideoFile { get; set; }
 
         public List<MovieGenre> MovieGenres { get; set; }

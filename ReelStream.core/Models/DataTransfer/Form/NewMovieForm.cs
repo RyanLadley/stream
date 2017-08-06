@@ -2,7 +2,7 @@
 using ReelStream.core.External.Context;
 using ReelStream.core.Models.DataTransfer.Response;
 using ReelStream.data.Models.Entities;
-using ReelStream.data.Models.Repositories.IRepositories;
+using ReelStream.data.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -45,10 +45,11 @@ namespace ReelStream.core.Models.DataTransfer.Form
         }
         
 
-        public Movie MapToEntity(VideoFile file, bool includeGenreEntities = false)
+        public Movie MapToEntity(long userId, VideoFile file, bool includeGenreEntities = false)
         {
             var movieEntity = new Movie
             {
+                UserId = userId,
                 Title = title,
                 Description = overview,
                 Year = releaseDate.HasValue ? releaseDate.Value.Year : 0,

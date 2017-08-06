@@ -1,0 +1,8 @@
+﻿{
+  "TokenOptions": {
+    "Issuer": "01-ReelStreamApi-10",
+    "Audience": "10-BeatifulUsers-01",
+    "Expiration": "365.00:00:00", //1 year
+    "SecurityKey": "This-is-Probably-Fake"
+  }
+}

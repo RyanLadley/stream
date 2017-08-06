@@ -1,8 +1,10 @@
 @import "shared/colors";
+@import "shared/variables";
 @import "shared/mixins";
 @import "shared/components";
 @import "shared/dialog";
 @import "headers";
+@import "registrar";
 @import "browse-filter";
 @import "add-movie/main-button";
 @import "add-movie/file-select";

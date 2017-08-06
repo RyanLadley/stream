@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ReelStream.data.Models.Context;
 using ReelStream.data.Models.Entities;
-using ReelStream.data.Models.Repositories.IRepositories;
+using ReelStream.data.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ReelStream.data.Models.Repositories
+namespace ReelStream.data.Repositories
 {
     public class VideoFileRepository : IVideoFileRepository
     {

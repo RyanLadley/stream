@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using ReelStream.data.Models.Entities;
-using ReelStream.data.Models.Repositories.IRepositories;
+using ReelStream.data.Repositories.IRepositories;
 using ReelStream.data.Models.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Data.SqlClient;
 
-namespace ReelStream.data.Models.Repositories
+namespace ReelStream.data.Repositories
 {
     public class MovieRepository : IMovieRepository
     {
@@ -19,13 +19,15 @@ namespace ReelStream.data.Models.Repositories
                 $"SELECT Movies.* "+
                 $"  FROM Movies " +
                 $"  JOIN MovieGenres on MovieGenres.MovieId = Movies.MovieId " +
-                $"  WHERE MovieGenres.GenreId = @genreId";
+                $"  WHERE Movies.UserId = @userId" +
+                $"      AND MovieGenres.GenreId = @genreId";
 
         private string sqlSelectMoviesInProgress =
                 $"SELECT Movies.* " +
                 $"  FROM Movies " +
                 $"  JOIN VideoFiles ON Movies.VideoFileId = VideoFiles.VideoFileId " +
-                $"  WHERE Movies.PlaybackTime IS NOT NULL" +
+                $"  WHERE Movies.UserId = @userId" +
+                $"      AND Movies.PlaybackTime IS NOT NULL" +
                 $"      AND Movies.PlaybackTime < VideoFiles.Duration ";
 
         private string sqlUpdateMoviePlaybackTime =
@@ -37,9 +39,9 @@ namespace ReelStream.data.Models.Repositories
 
         public MovieRepository(MainContext context)
         {
-            
             _context = context;
         }
+
         public Movie Add(Movie movie)
         {
             //We only care about updating the Id's from the MovieGenre entity, so we ignore the actual objects.
@@ -72,19 +74,21 @@ namespace ReelStream.data.Models.Repositories
                     .FirstOrDefault(movie => movie.MovieId == movieId);
         }
 
-        public List<Movie> GetAll()
+        public List<Movie> GetAll(long userId)
         {
             return _context.Movies
+                .Where(movie => movie.UserId == userId)
                 .Include(movie => movie.MovieGenres)
                     .ThenInclude(mg => mg.Genre)
                 .Include(movie => movie.VideoFile)
                 .ToList();
         }
 
-        public List<Movie> GetAllForGenre(int genreId)
+        public List<Movie> GetAllForGenre(long userId, int genreId)
         {
             var pGenreId = new SqlParameter("@genreId", genreId);
-            var movies = _context.Movies.FromSql(sqlSelectMoviesForGenre, pGenreId)
+            var pUserId = new SqlParameter("@userId", userId);
+            var movies = _context.Movies.FromSql(sqlSelectMoviesForGenre, pGenreId, pUserId)
                 .Include(movie => movie.MovieGenres)
                     .ThenInclude(mg => mg.Genre)
                 .Include(movie => movie.VideoFile)
@@ -100,9 +104,10 @@ namespace ReelStream.data.Models.Repositories
             return movie;
         }
 
-        public List<Movie> GetMoviesInProgress()
+        public List<Movie> GetMoviesInProgress(long userId)
         {
-            var movies = _context.Movies.FromSql(sqlSelectMoviesInProgress)
+            var pUserId = new SqlParameter("@userId", userId);
+            var movies = _context.Movies.FromSql(sqlSelectMoviesInProgress, pUserId)
                 .Include(movie => movie.MovieGenres)
                     .ThenInclude(mg => mg.Genre)
                 .Include(movie => movie.VideoFile)
@@ -113,16 +118,17 @@ namespace ReelStream.data.Models.Repositories
 
         }
 
-        public List<Movie> GetNewlyAddedMovies()
+        public List<Movie> GetNewlyAddedMovies(long userId)
         {
             DateTime now = DateTime.Now;
-            DateTime SevenDaysAgo = new DateTime(now.Year, now.Month, now.Day - 7);
+            DateTime SevenDaysAgo = now.AddDays(-7);
 
             return _context.Movies
+                .Where(movie => movie.DateCreated > SevenDaysAgo
+                             && movie.UserId == userId)
                 .Include(movie => movie.MovieGenres)
                     .ThenInclude(mg => mg.Genre)
                 .Include(movie => movie.VideoFile)
-                .Where(movie => movie.DateCreated > SevenDaysAgo)
                 .OrderByDescending(movie => movie.DateCreated)
                 .ToList();
         }

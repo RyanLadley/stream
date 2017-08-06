@@ -1,6 +1,6 @@
 ﻿using ReelStream.core.External.Models;
 using ReelStream.data.Models.Entities;
-using ReelStream.data.Models.Repositories.IRepositories;
+using ReelStream.data.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
