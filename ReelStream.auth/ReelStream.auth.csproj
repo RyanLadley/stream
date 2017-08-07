@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\DataTransfer\Response\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ReelStream.core\ReelStream.core.csproj" />
     <ProjectReference Include="..\ReelStream.data\ReelStream.data.csproj" />
   </ItemGroup>

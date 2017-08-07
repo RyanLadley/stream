@@ -1,0 +1,69 @@
+﻿.user-settings-container{
+    margin: auto;
+    width: 650px;
+}
+
+.user-title {
+    border-bottom: 3px solid $reel-stream-blue;
+    width: 100%;
+
+    h2 {
+        font-size: 30px;
+        border-bottom: none;
+        margin-left: 0;
+    }
+}
+
+.user-section{
+
+    width: 100%;
+
+}
+
+
+.user-section-title {
+    width: 100%;
+    border-bottom: solid 1px #E1E1E1;
+
+    h3 {
+        font-size: 25px;
+        margin: 15px 0 3px 0;
+    }
+}
+
+.user-section-field {
+    font-size: 18px;
+    padding: 10px 0 0 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
+
+    &:hover {
+        //background: #F5F5F5;
+        border-bottom: solid 1px $reel-stream-blue;
+    }
+}
+
+.storage-usage-display {
+    position: relative;
+    margin: 10px 0 15px 0;
+    width: 100%;
+}
+
+.storage-usage-track {
+    z-index: 2;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    height: 10px;
+    position: absolute;
+    width: 100%;
+}
+
+.storage-usage-progress {
+    position: absolute;
+    top: 0;
+    left:0;
+    height: 100%;
+    display: inline-block;
+    background-color: $reel-stream-blue;
+    //box-shadow: 1px 1px 1px $reel-stream-grey;
+}

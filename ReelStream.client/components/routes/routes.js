@@ -31,6 +31,12 @@ app.config(['$routeProvider', '$locationProvider',
             templateUrl: '/site/registrar/register.index.html'
         }
     )
+    .when("/user/:username",
+        {
+            controller: 'userController',
+            templateUrl: '/site/user/user.index.html'
+        }
+    )
     .otherwise("/",
     {
         redirectTo: "/"

@@ -23,11 +23,12 @@ app.service('serverRequest', function ($http, $cookies, $location, appSettings, 
                 'Authorization': 'Bearer ' + tokenManager.getToken()
             }
         })
-        .then(
-        function (response) {
-            checkAuthorized(response)
-            return response;
-        });
+            .then(
+            function success(response) {
+                return response;
+            }, function error(response) {
+                return response;
+            });
     }
 
     var checkAuthorized = function (response) {

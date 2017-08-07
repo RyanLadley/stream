@@ -14,14 +14,6 @@ namespace ReelStream.data.Repositories
         private MainContext _context;
 
         #region SQL
-        //Returns a list of movies that contain the genre provided in the @genreId param
-        private string sqlSelectMoviesForGenre =
-                $"SELECT Movies.* "+
-                $"  FROM Movies " +
-                $"  JOIN MovieGenres on MovieGenres.MovieId = Movies.MovieId " +
-                $"  WHERE Movies.UserId = @userId" +
-                $"      AND MovieGenres.GenreId = @genreId";
-
         private string sqlSelectMoviesInProgress =
                 $"SELECT Movies.* " +
                 $"  FROM Movies " +
@@ -86,9 +78,13 @@ namespace ReelStream.data.Repositories
 
         public List<Movie> GetAllForGenre(long userId, int genreId)
         {
-            var pGenreId = new SqlParameter("@genreId", genreId);
-            var pUserId = new SqlParameter("@userId", userId);
-            var movies = _context.Movies.FromSql(sqlSelectMoviesForGenre, pGenreId, pUserId)
+            var movies = 
+                (from movie in _context.Movies
+                join movieGenre in _context.MovieGenres on movie.MovieId equals movieGenre.MovieId
+                where movie.UserId == userId
+                    && movieGenre.GenreId == genreId
+                select movie)
+
                 .Include(movie => movie.MovieGenres)
                     .ThenInclude(mg => mg.Genre)
                 .Include(movie => movie.VideoFile)

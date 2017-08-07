@@ -1,0 +1,87 @@
+﻿<div class="user-settings-container">
+    <div class="section-title user-title">
+        <h2>Account Settings</h2>
+    </div>
+
+    <div class="user-section">
+        <div class="user-section-title">
+            <h3>Basics</h3>
+        </div>
+
+        <div class="label-value user-section-field clickable">
+            <p class="label">Name:</p>
+            <p class="value">{{user.firstName}} {{user.lastName}}</p>
+        </div>
+        
+        <div class="label-value user-section-field clickable">
+            <p class="label">Email:</p>
+            <p class="value">{{user.email}}</p>
+        </div>
+
+        <div class="label-value user-section-field">
+            <p class="label">Username:</p>
+            <p class="value">{{user.username}}</p>
+        </div>
+
+        <div class="label-value user-section-field clickable">
+            <p class="label">Password:</p>
+            <p class="value">--</p>
+        </div>
+
+        <div class="user-section-title">
+            <h3>Usage</h3>
+        </div>
+
+        <div class="storage-usage-display" title="{{100 - (user.totalSpacedUsed/user.totalSpacedAllowed * 100)| number : 0 }}% of allocated storage space remains">
+            <div class="storage-usage-track">
+                <div class="storage-usage-progress" ng-style="usageStyle" />
+            </div>
+        </div>
+
+        <div class="label-value user-section-field">
+            <p class="label">Storage:</p>
+            <p class="value">{{user.totalSpacedUsed | bytesToGigs}}GB / {{user.totalSpacedAllowed | bytesToGigs}}GB</p>
+        </div>
+
+        <div class="label-value">
+            <a class="value" href="/user/{{username}}/files">Manage Storage</a>
+        </div>
+
+        <div class="user-section-title">
+            <h3>Plan</h3>
+        </div>
+
+        <div class="label-value user-section-field">
+            <p class="label">Tier:</p>
+            <p class="value">Free</p>
+        </div>
+
+        <div class="label-value user-section-field">
+            <p class="label">Storage:</p>
+            <p class="value">10GB</p>
+        </div>
+
+        <div class="label-value user-section-field">
+            <p class="label">Monthly Payment:</p>
+            <p class="value">$0.00</p>
+        </div>
+
+        <div class="label-value">
+            <a class="value" href="/user/{{username}}/plan">Change Plan</a>
+        </div>
+        <div class="user-section-title">
+            <h3>Payment</h3>
+        </div>
+
+        <div class="label-value user-section-field clickable">
+            <p class="label">VISA</p>
+            <p class="value">**** **** **** 1234</p>
+        </div>
+
+        <div class="label-value">
+            <a class="value" href="/user/{{username}}/billing">View Billing History</a>
+        </div>
+
+    </div>
+
+</div>

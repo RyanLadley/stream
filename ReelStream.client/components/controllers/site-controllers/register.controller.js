@@ -6,7 +6,15 @@
 
         if (isCompleteUser($scope.user)) {
             if ($scope.user.passphrase == $scope.confirmPassword) {
-                serverRequest.post('/api/user/register', $scope.user);
+                serverRequest.post('/api/user/register', $scope.user).then(function (response) {
+
+                    if (response.status == 200) {
+                        $rootScope.loginUser(response.data);
+                    }
+                    else {
+                        $scope.errorMessage = response.data.errorMessage;
+                    }
+                });
             }
             else {
                 $scope.errorMessage = "Passwords Don't Match";

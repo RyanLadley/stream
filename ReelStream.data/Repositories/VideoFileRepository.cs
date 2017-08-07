@@ -4,6 +4,7 @@ using ReelStream.data.Models.Entities;
 using ReelStream.data.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace ReelStream.data.Repositories
     public class VideoFileRepository : IVideoFileRepository
     {
         MainContext _context;
-
+        
         public VideoFileRepository(MainContext context)
         {
             _context = context;
@@ -41,6 +42,17 @@ namespace ReelStream.data.Repositories
             _context.SaveChanges();
 
             return videoFile;
+        }
+
+        public long TotalFileSizeForUser(long userId)
+        {
+            var total =
+                (from file in _context.VideoFiles
+                 join movie in _context.Movies on file.VideoFileId equals movie.VideoFileId
+                 where movie.UserId == userId
+                 select file).Sum(file => file.FileSize);
+
+            return total;
         }
     }
 }

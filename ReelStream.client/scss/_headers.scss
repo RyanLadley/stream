@@ -12,3 +12,32 @@
         height: 55%;
     }
 }
+
+.user-options{
+    float: right;
+    margin: 25px;
+}
+
+.user-picture {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    border: solid 2px $reel-stream-blue;
+    cursor: pointer;
+
+    &:hover {
+        background-color: darken($reel-stream-blue, 30%);
+    }
+
+    p {
+        margin: auto 0;
+        line-height: 50px;
+        font-size: 40px;
+        //font-style:italic;
+        font-weight: bold;
+    }
+}

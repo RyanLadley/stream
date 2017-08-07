@@ -8,10 +8,8 @@ using ReelStream.auth.Models.Buisness;
 using ReelStream.auth.Models.DataTransfer.Form;
 using ReelStream.auth.Settings;
 using ReelStream.data.Repositories.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ReelStream.auth.Models.DataTransfer.Response;
+using ReelStream.core.Models.DataTransfer.Response;
 
 namespace ReelStream.api.Controllers
 {
@@ -22,13 +20,29 @@ namespace ReelStream.api.Controllers
         IUserRegistrar _registrar;
         IOptions<AuthSettings> _settings;
         IUserRepository _userRepository;
+        IVideoFileRepository _videFileRepository;
 
-        public UserController(IUserRegistrar userRegist, IUserRepository userRepo, IOptions<AuthSettings> settings)
+        public UserController(IUserRegistrar userRegist, IUserRepository userRepo, IVideoFileRepository videoRepo, IOptions<AuthSettings> settings)
         {
             _registrar = userRegist;
             _settings = settings;
             _userRepository = userRepo;
+            _videFileRepository = videoRepo;
         }
+
+
+        [HttpGet("settings")]
+        [Authorize(Policy = "GeneralUser")]
+        public IActionResult Get()
+        {
+            var userId = TokenManager.ExtractUserId(User.Claims);
+            var user = _userRepository.Get(userId);
+            var fileSize = _videFileRepository.TotalFileSizeForUser(userId);
+
+            var userSettingsResponse = UserSettingsResponse.MapFromObject(user, fileSize);
+            return Ok(userSettingsResponse);
+        }
+
 
         [HttpPost("register")]
         public IActionResult Register([FromBody] UserRegistrationForm registration)
@@ -48,7 +62,7 @@ namespace ReelStream.api.Controllers
             var user = _registrar.ValidateLogin(credentials);
 
             if(user == null)
-                return BadRequest("Incorect Username or Password");
+                return BadRequest(new ErrorResponse("Incorect Username or Password"));
 
             TokenManager tokenizer = new TokenManager();
             var response = tokenizer.CreateToken(user, _settings.Value.TokenOptions);
@@ -78,7 +92,6 @@ namespace ReelStream.api.Controllers
             
             TokenManager tokenizer = new TokenManager();
             var response = tokenizer.CreateToken(user, _settings.Value.TokenOptions);
-
             return Ok(response);
         }
 

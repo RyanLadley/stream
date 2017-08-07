@@ -48,7 +48,8 @@ namespace ReelStream.core.Models.Buisness
                 FileName = this.FileName,
                 Folder = this.Folder.Replace("wwwroot\\", "").Replace("\\", "/"),
                 FileExtension = this.FileExtension.TrimStart('.'),
-                Duration = TimeSpan.FromMilliseconds(this.Duration)
+                Duration = TimeSpan.FromMilliseconds(this.Duration),
+                FileSize = this.FileSize
             };
         }
         
@@ -65,6 +66,7 @@ namespace ReelStream.core.Models.Buisness
             videoFile.Folder = this.Folder.Replace("wwwroot\\", "").Replace("\\", "/");
             videoFile.FileExtension = this.FileExtension.TrimStart('.');
             videoFile.Duration = TimeSpan.FromMilliseconds(this.Duration);
+            videoFile.FileSize = this.FileSize;
 
             return videoFile;
         }

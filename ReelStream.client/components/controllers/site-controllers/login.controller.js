@@ -6,9 +6,13 @@
 
         if (isFilled($scope.credentials)) {
             serverRequest.post('/api/user/login', $scope.credentials).then(function (response) {
-                tokenManager.saveToken(response.data.accessToken);
-                $rootScope.isLoggedIn = true;
-                $location.url("/");
+                
+                if (response.status == 200) {
+                    $rootScope.loginUser(response.data);
+                }
+                else {
+                    $scope.errorMessage = response.data.errorMessage;
+                }
             });
         }
         else {

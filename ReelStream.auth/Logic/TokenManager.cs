@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 using System.Linq;
+using ReelStream.auth.Models.DataTransfer.Response;
 
 namespace ReelStream.auth.Logic
 {
@@ -64,7 +65,14 @@ namespace ReelStream.auth.Logic
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-            return new TokenResponse() { AccessToken = encodedJwt, ExpiresIn = (int)options.Expiration.TotalSeconds };
+            var response = new TokenResponse
+            {
+                AccessToken = encodedJwt,
+                ExpiresIn = (int)options.Expiration.TotalSeconds,
+                User = UserResponse.MapFromObject(user)
+            };
+
+            return response;
         }
     }
 }

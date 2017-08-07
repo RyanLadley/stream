@@ -15,7 +15,8 @@ namespace ReelStream.data.Models.Entities
         public string Folder { get; set; }
         public string FileName { get; set; }
         public string FileExtension { get; set; }
-        public TimeSpan? Duration { get; set; }
+        public long FileSize { get; set; }
+        public TimeSpan Duration { get; set; }
 
         public Movie Movie { get; set; }
     }

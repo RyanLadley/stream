@@ -63,6 +63,27 @@ input[type=text], input[type=password], input[type=email] {
     }
 }
 
+.label-value {
+    display: inline-block;
+    width: 100%;
+
+    p {
+        margin: 0;
+    }
+    a{
+        color: blue;
+        //text-decoration: none;
+    }
+
+    .label {
+        float: left;
+    }
+
+    .value {
+        float: right;
+    }
+}
+
 .standard-button {
     background: $reel-stream-blue;
     color: white;
@@ -89,4 +110,8 @@ input[type=text], input[type=password], input[type=email] {
 .error{
     color: red;
     margin: 0;
+}
+
+.clickable{
+    cursor:pointer;
 }

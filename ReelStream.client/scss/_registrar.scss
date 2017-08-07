@@ -29,8 +29,8 @@ $registrar-input-width: $regristrar-container-width + ($input-padding*2);
 //Think about combining thios with "dialog-title"
 .registrar-title {
     border-bottom: 3px solid $reel-stream-blue;
-
     width: $registrar-input-width;
+
     h2 {
         border-bottom: none;
         margin-left: 0;
