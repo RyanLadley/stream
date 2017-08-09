@@ -80,6 +80,9 @@ namespace ReelStream.api.Controllers
         [Authorize(Policy = "GeneralUser")]
         public async Task<IActionResult> SearchMovie(string searchTerm)
        {
+            if (String.IsNullOrEmpty(searchTerm))
+                return Ok();
+
             List<ExternalMovie> externalMovie = await _externalDB.SearchMovie(searchTerm);
 
             List<MovieSearchResponse> response = new List<MovieSearchResponse>();

@@ -21,7 +21,6 @@ namespace ReelStream.auth.Logic
         /// </summary>
         public PasswordIngredients HashPassphrase(PasswordIngredients ingredients)
         {
-            // generate a 128-bit salt using a secure PRNG
             if(ingredients.Salt == null)
             {
                 ingredients.Salt = new byte[128 / 8];
@@ -39,6 +38,11 @@ namespace ReelStream.auth.Logic
             return ingredients;
         }
         
+        /// <summary>
+        /// TODO: Make conditions for what is and isnt a valid password
+        /// </summary>
+        /// <param name="passphrase"></param>
+        /// <returns></returns>
         public bool IsValidPassphrase(string passphrase)
         {
             return true;

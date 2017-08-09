@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using ReelStream.auth.Logic;
+using ReelStream.core.Logic.Interfaces;
 
 namespace ReelStream.api.Controllers
 {
@@ -20,15 +21,17 @@ namespace ReelStream.api.Controllers
     {
         FileUpload _uploadService;
         private readonly IExternalMovieDatabase _externalDB;
-        IMovieRepository _movieRpository;
-        IVideoFileRepository _videoFileRpository;
+        private IMovieRepository _movieRpository;
+        private IVideoFileRepository _videoFileRpository;
+        private IVideoFormatConverter _videoConverter;
 
-        public UploadController(IMovieRepository movieRepo, IVideoFileRepository videoFileRepo, IGenreRepository genreRepo, IExternalMovieDatabase external)
+        public UploadController(IMovieRepository movieRepo, IVideoFileRepository videoFileRepo, IGenreRepository genreRepo, IExternalMovieDatabase external, IVideoFormatConverter videoConvert)
         {
             _uploadService = new FileUpload();
             _externalDB = external;
             _movieRpository = movieRepo;
             _videoFileRpository = videoFileRepo;
+            _videoConverter = videoConvert;
         }
 
 
@@ -70,16 +73,9 @@ namespace ReelStream.api.Controllers
                         
                         //If file is not mp4. it cannot be streamed properly to a browser so convert it
                         //This process takes a while. Consider moveing this out of the flow
-                        if (metadata.FileExtension != ".mp4")
+                        if (movieEntity.VideoFile.FileExtension != ".mp4")
                         {
-                            VideoFormatConverter converter = new VideoFormatConverter(metadata, new MediaManager());
-                            metadata = converter.ConvertTo("mp4");
-                            metadata.GetDuration(new MediaManager());
-
-                            var videoFileEntity = metadata.MapToExistingVideoFileEntity(movieEntity.VideoFile);
-                            //This saves the pending changes to the db. If this block is moved, change Save to Update. 
-                            _videoFileRpository.Update(videoFileEntity);
-                            movieEntity.VideoFile = videoFileEntity;
+                            _videoConverter.AddVideoToQueue(movieEntity.VideoFile);
                         }
 
 

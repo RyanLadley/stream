@@ -17,6 +17,8 @@ using ReelStream.auth.Logic;
 using ReelStream.auth.Settings;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using ReelStream.core.Logic.Interfaces;
+using ReelStream.core.Logic;
 
 namespace ReelStream
 {
@@ -59,11 +61,13 @@ namespace ReelStream
             services.AddScoped<IVideoFileRepository, VideoFileRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IMediaManager, MediaManager>();
 
             services.AddTransient<IPasswordManager, PasswordManager>();
             services.AddTransient<IUserRegistrar, UserRegistrar>();
-
             services.AddTransient<ExternalMovieDatabase>();
+
+            services.AddSingleton<IVideoFormatConverter, VideoFormatConverter>();
 
             services.AddDbContext<MainContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
