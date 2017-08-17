@@ -1,0 +1,26 @@
+﻿<div class="browse-tab" (mouseenter)="tabDisplay(true)" (mouseleave)="tabDisplay(false)">
+    <div class="browse-button" (click)="displayTab = !displayTab">
+        <i class="fa fa-binoculars" aria-hidden="true"></i>
+        <h4>Browse</h4>
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
+    </div>
+
+    <div class="browse-container" [hidden]="!displayTab">
+        <div class="browse-selection" (mouseleave)="tabDisplay(false)">
+            <div class="browse-type">
+                <h3>Movies</h3>
+                <h3>TV Shows</h3>
+                <h3 id="selected">Both</h3>
+            </div>
+            <div class="browse-genres">
+                <ng-container *ngFor="let genre of genres; let indx = index "> 
+                    <div  class="browse-column" *ngIf="indx % columnHeight == 0">
+                        <a class="browse-column-position" *ngFor="let n of columnPositions" href="browse/genre/{{genres[indx+n].genreId}}/movies">
+                            <p>{{genres[indx+n].name}}</p>
+                        </a>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

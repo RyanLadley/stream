@@ -1,0 +1,18 @@
+﻿<div class="section-title">
+    <h2>{{queueTitle}}</h2>
+</div>
+
+<div class="queue-row" (mouseover)="arrowDisplay(true)" (mouseleave)="arrowDisplay(false)">
+    <div class="movie-queue">
+
+        <div class="queue-arrow queue-left-arrow" *ngIf="displayArrows" (click)="changePage(-1)">
+            <i class=" fa fa-5x fa-angle-left"></i>
+        </div>
+
+        <movie-row (numberToDisplay)="updateMovieQueue($event)" [movieCollection]="shownMovies"></movie-row>
+
+        <div class="queue-arrow queue-right-arrow" *ngIf="displayArrows" (click)="changePage(1)">
+            <i class=" fa fa-5x fa-angle-right"></i>
+        </div>
+    </div>
+</div>

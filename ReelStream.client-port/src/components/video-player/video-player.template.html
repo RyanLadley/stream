@@ -1,0 +1,36 @@
+﻿<div id="full-screen-container">
+    <video id="main-video-player" preload="auto" controlsList="nodownload" autoplay="autoplay" (mousemove)="displayControls()">
+        <source src="{{streamApi}}" type="video/mp4">
+    </video>
+
+    <!--"-->
+    <div class="custom-video-controls-display" [hidden]="!showControls">
+        <div class="video-controls">
+            <div class="controls-button-container ">
+
+                <div class="playback-track" id="playback-track">
+                    <div class="playback-progress" [ngStyle]="progressStyle" ></div>
+                    <div class="playback-click-area" (click)="jumpProgress($event)" (mousemove)="getJumpLocation($event)" (mouseenter)="displayJumpLocation = true" (mouseleave)="displayJumpLocation = false"  ></div>
+                    <p class="jump-location" [ngStyle]="jumpLocationPosition" [hidden]="!displayJumpLocation">{{jumpLocation | secondsToTime}}</p>
+                </div>
+
+                <div class="background">
+                    <div class="video-controls-button" id="play-pause-button" (click)="togglePlayOrPause()">
+                        <i class="fa fa-lg" [ngClass]="playOrPauseIcon" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="video-controls-button" id="volume-button" (click)="toggleMuted()">
+                        <i class="fa fa-lg" [ngClass]="volumeIcon" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="video-controls-button" id="full-screen-button" (click)="toggleFullScreen()">
+                        <i class="fa" [ngClass]="fullScreenIcon" aria-hidden="true"></i>
+                    </div>
+
+                    <p class="time-stamp">{{videoPlayer.currentTime | secondsToTime}} | {{videoPlayer.duration | secondsToTime}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

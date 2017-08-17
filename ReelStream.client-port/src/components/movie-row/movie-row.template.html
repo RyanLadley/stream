@@ -1,0 +1,1 @@
+﻿<movie-select [selectStyle]="movieStyle[indx]" *ngFor="let movie of movieCollection; let indx = index" [movie]="movie" (mouseover)="enlargeElement(indx)" (mouseleave)="returnElements()"></movie-select>

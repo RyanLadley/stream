@@ -1,0 +1,24 @@
+@import "shared/colors";
+@import "shared/variables";
+@import "shared/mixins";
+@import "shared/components";
+@import "shared/dialog";
+@import "headers";
+@import "registrar";
+@import "browse-tab";
+@import "add-movie/main-button";
+@import "add-movie/file-select";
+@import "add-movie/selection";
+@import "movie-select";
+@import "movie-row";
+@import "movie-queue";
+@import "movie-browse";
+@import "video-player";
+@import "user";
+
+
+body {
+    font-family: 'Lato', sans-serif;
+    padding: 0;
+    margin: 0;
+}

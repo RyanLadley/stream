@@ -1,0 +1,99 @@
+﻿#main-video-player {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: black;
+
+}
+
+
+.custom-video-controls-display {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2147483648;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+.video-controls {
+    position: absolute;
+    display: inline-block;
+    bottom: 50px;
+    width: 100%;
+
+    .controls-button-container {
+        display: block;
+        width: 75%;
+        margin: 0 auto;
+        //main definition of .background in shared/components
+        .background {
+            padding: 5px 0;
+            background: rgba(0,0,0,.55);
+        }
+    }
+}
+
+.time-stamp {
+    margin: 0;
+    padding: 5px 5px 0 0;
+    float: right;
+    font-size: 13px;
+}
+
+.video-controls-button {
+    cursor: pointer;
+    padding: 5px 10px;
+
+    i {
+        float: left;
+    }
+}
+#volume-button, #play-pause-button{
+    float: left;
+}
+
+#full-screen-button{
+    float: right;
+}
+
+.playback-track {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 3px;
+    background: #292929;
+
+    .playback-click-area {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: -2px;
+        bottom: -2px;
+        cursor: pointer;
+        display: inline-block;
+        z-index: 11;
+    }
+
+    .jump-location {
+        position: absolute;
+        top: -40px;
+        color: white;
+        font-size: 12px;
+        padding: 5px;
+        background: rgba(0,0,0,.55);
+    }
+
+    .playback-progress {
+        display: inline-block;
+        top: 0;
+        left: 0;
+        position: absolute;
+        height: 100%;
+        background: $reel-stream-blue;
+    }
+}

@@ -1,0 +1,38 @@
+﻿.queue-row {
+    margin: 25px 60px 0 60px;
+    height: $movie-img-height;
+}
+
+.movie-queue {
+    height: 100%;
+    position: relative;
+}
+
+.queue-arrow {
+    display: block;
+    transition: all linear 500ms;
+    position: absolute;
+    top: 0;
+    width: 50px;
+    height: $movie-img-height;
+    background: rgba(188,188,188, 0.5);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    z-index: 3;
+    .fa {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 20%;
+        background: rgba(0, 0, 0, 0);
+    }
+}
+
+.queue-left-arrow{
+    left: 0;
+}
+
+.queue-right-arrow {
+    right: 0;
+}

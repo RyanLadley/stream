@@ -1,0 +1,10 @@
+﻿<a class="movie-select" [ngStyle]="selectStyle" href="video-stream/{{movie.movieId}}">
+    <div class="progress-track" *ngIf="showPlaybackTrack()">
+        <div class="movie-select-progress" [ngStyle]="progressStyle"></div>
+    </div>
+    <img src="{{imageServer}}/{{movie.imageUrl}}" />
+    <div class="movie-img-description">
+        <h3>{{movie.title}}</h3>
+        <p>{{movie.description}}</p>
+    </div>
+</a>

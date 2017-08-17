@@ -1,0 +1,64 @@
+﻿.movie-select {
+    float: left;
+    margin: 0 3px;
+    height: $movie-img-height;
+    width: $movie-img-width;
+    position: relative;
+    overflow: hidden;
+    @include transition-dimensions(.75s, .75s);
+    background: #3b3b3b;
+
+    img {
+        position: relative;
+        top: 0;
+        max-height: $movie-img-height;
+        max-width: $movie-img-width;
+        width: auto;
+        height: auto;
+    }
+
+    &:hover {
+        width: $movie-img-width *2;
+    }
+}
+
+
+.movie-img-description {
+    left: $movie-img-width;
+    top: 0;
+    color: white;
+    position: absolute;
+    width: $movie-img-width;
+    height: $movie-img-height;
+    @include transition-time(.75s);
+
+    h3 {
+        margin-top: 30px;
+        padding: 0 10px;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    p {
+        display: inline-block;
+        padding: 10px;
+    }
+}
+
+.progress-track {
+    z-index: 2;
+    display: inline-block;
+    width: 5px;
+    position: absolute;
+    left: 10px;
+    height: $movie-img-height;
+}
+
+.movie-select-progress {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: inline-block;
+    background-color: $reel-stream-blue;
+    //box-shadow: 1px 1px 1px $reel-stream-grey;
+}

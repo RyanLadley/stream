@@ -1,0 +1,5 @@
+﻿<div *ngFor="let queue of queues">
+    <movie-queue [queueTitle]="queue.name" [movies]="queue.movies"></movie-queue>
+</div>
+
+<add-movie></add-movie>

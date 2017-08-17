@@ -1,0 +1,28 @@
+﻿<div class="add-movie-button" (click)="displayDialog = true" [hidden]="selectedMovie.flow.isUploading()">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+</div>
+
+<div class="add-movie-button-upload" [hidden]="!selectedMovie.flow.isUploading()" title="{{selectedMovie.flow.opts?.query.title}}">
+    <div class="add-movie-button">
+        <i class="fa fa-upload"  aria-hidden="true"></i>
+    </div>
+    <div class="add-movie-button upload-remaining" [ngStyle]="uploadingStyle">
+        <i class="fa fa-upload" aria-hidden="true"></i>
+    </div>
+</div>
+
+<div class="dialog-background" *ngIf="displayDialog  && currentDisplay != 'none'">
+    <div class="dialog-content">
+        <div class="dialog-close"(click)="displayDialog = false">&#10006;</div>
+        <i *ngIf ="currentDisplay.previous" (click) ="back()" class="fa fa-arrow-circle-o-left  fa-3x dialog-back" aria-hidden="true"></i>
+
+        <div class="dialog-title">
+            <h2>Add A Movie</h2>
+        </div>
+        
+        <add-movie-file-select [hidden]="!currentDisplay.current == 'file-select'"  [display] ="currentDisplay" [selectedMovie] ="selectedMovie"></add-movie-file-select>
+        <!--<add-movie-search ng-show="currentDisplay.current == 'search'" display ="currentDisplay" selected-movie ="selectedMovie"></add-movie-search>
+        <add-movie-confirmation ng-show="currentDisplay.current == 'confirm'" display="currentDisplay" selected-movie ="selectedMovie"></add-movie-confirmation>
+        -->
+    </div>
+</div>

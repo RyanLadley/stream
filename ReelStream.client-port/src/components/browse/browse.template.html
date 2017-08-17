@@ -1,0 +1,11 @@
+﻿<div class="section-title">
+    <h2 *ngIf="genre">{{genre.name | capitalize}} {{type | capitalize}} </h2>
+</div>
+
+<div class="movie-browse">
+    <ng-container *ngFor="let collection of movieCollectionRows">
+        <movie-row  (numberToDisplay)="rowAdjustment($event)" [movieCollection]="collection"></movie-row>
+    </ng-container>
+</div>
+
+<add-movie></add-movie>

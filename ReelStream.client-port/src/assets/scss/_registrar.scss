@@ -1,0 +1,43 @@
+﻿$regristrar-container-width: 500px;
+$regristrar-container-pad: 30px;
+
+$registrar-input-width: $regristrar-container-width + ($input-padding*2);
+
+.registrar-page {
+    position:absolute;
+    display: inline-block;
+    background-color: $reel-stream-grey;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.registrar-contatiner {
+    margin: 50px auto;
+    display: inline-block;
+    width: $regristrar-container-width;
+    background: #E4E4E4;
+    padding: $regristrar-container-pad;
+    padding-right: $regristrar-container-pad + ($input-padding*2);
+}
+
+.regristrar-input-container {
+    margin-top: 20px;
+    display: inline-block;
+    width: $regristrar-container-width;
+}
+
+//Think about combining thios with "dialog-title"
+.registrar-title {
+    border-bottom: 3px solid $reel-stream-blue;
+    width: $registrar-input-width;
+
+    h2 {
+        border-bottom: none;
+        margin-left: 0;
+    }
+}
+
+.registrar-button {
+    margin-top: 50px;
+    width: $registrar-input-width;
+}

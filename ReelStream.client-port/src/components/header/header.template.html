@@ -1,0 +1,13 @@
+﻿<div class="reelstream-header">
+    <a href="/">
+        <img class="tittle-img" src="./assets/images/reelstream.png" />
+    </a>
+    <div *ngIf="isLoggedIn">
+        <browse-tab></browse-tab>
+        <div class="user-options">
+            <a href="user/{{user.username}}" class="user-picture">
+                <p>{{initials}}</p>
+            </a>
+        </div>
+    </div>
+</div>
